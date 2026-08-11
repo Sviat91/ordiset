@@ -1,0 +1,82 @@
+.nav {
+  position: fixed;
+  top: 0;
+  inset-inline: 0;
+  z-index: 50;
+  height: var(--nav-h);
+  background: rgba(18, 20, 23, 0.72);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+.row {
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-right: auto;
+}
+
+.mark {
+  display: block;
+  width: 28px;
+  height: 28px;
+  overflow: hidden;
+}
+
+.markImg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.wordmark {
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: var(--text);
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.link {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  transition: color 0.15s ease;
+}
+
+.link:hover {
+  color: var(--text);
+}
+
+.cta {
+  font-size: 0.875rem;
+  padding: 9px 18px;
+  background: var(--accent);
+  color: var(--on-accent);
+  border-radius: var(--radius-pill);
+  transition: background 0.15s ease;
+}
+
+.cta:hover {
+  background: var(--accent-hover);
+}
+
+@media (max-width: 768px) {
+  .links {
+    display: none;
+  }
+}

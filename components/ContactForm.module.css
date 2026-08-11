@@ -1,0 +1,69 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+.input {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  padding: 12px 14px;
+  color: var(--text);
+  font: inherit;
+  resize: vertical;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+
+.inputError {
+  border-color: var(--danger);
+}
+
+.error {
+  font-size: 0.8125rem;
+  color: var(--danger);
+}
+
+.submit {
+  appearance: none;
+  border: none;
+  align-self: flex-start;
+  padding: 13px 24px;
+  font: inherit;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  background: var(--accent);
+  color: var(--on-accent);
+  border-radius: var(--radius-pill);
+  transition: background 0.15s ease;
+}
+
+.submit:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
+
+.submit:disabled {
+  background: var(--accent-press);
+  cursor: not-allowed;
+}
+
+.success {
+  font-size: 0.9375rem;
+  color: var(--text);
+}

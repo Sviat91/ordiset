@@ -1,0 +1,55 @@
+.window {
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-window);
+  box-shadow: var(--shadow-window);
+  overflow: hidden;
+  width: 100%;
+  /* Caps the visual's rendered height on short viewports: .body below has
+     no explicit width (fills .window) and aspect-ratio: 16/10, so bounding
+     .window's width also bounds .body's height (width / 1.6), scaling down
+     with viewport height instead of only with content width. */
+  max-width: clamp(352px, 64vh, 704px);
+  margin-inline: auto;
+}
+
+.titlebar {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding-inline: 16px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.dots {
+  display: flex;
+  gap: 6px;
+}
+
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.address {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg-elevated);
+  border-radius: var(--radius-pill);
+  font-size: 0.75rem;
+  color: var(--text-faint);
+  padding: 5px 14px;
+}
+
+.body {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  background-image: var(--shell-gradient), var(--shell-dot-grid);
+  background-size:
+    100% 100%,
+    16px 16px;
+}

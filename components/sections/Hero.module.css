@@ -1,0 +1,38 @@
+.actions {
+  display: flex;
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.primary {
+  padding: 13px 24px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  background: var(--accent);
+  color: var(--on-accent);
+  border-radius: var(--radius-pill);
+  transition: background 0.15s ease;
+}
+
+.primary:hover {
+  background: var(--accent-hover);
+}
+
+.secondary {
+  padding: 13px 24px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--text);
+  background: transparent;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  transition: border-color 0.15s ease;
+}
+
+.secondary:hover {
+  border-color: var(--accent);
+}
+
+.visual {
+  width: 100%;
+}

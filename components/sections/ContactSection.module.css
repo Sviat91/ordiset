@@ -1,0 +1,19 @@
+.section {
+  padding: clamp(96px, 12vh, 160px) 0;
+}
+
+.formWrap {
+  max-width: 560px;
+  width: 100%;
+  margin-inline: auto;
+  text-align: left;
+}
+
+.footer {
+  margin-top: 64px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  font-size: 0.8125rem;
+  color: var(--text-faint);
+}
