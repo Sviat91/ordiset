@@ -5,12 +5,11 @@
   box-shadow: var(--shadow-window);
   overflow: hidden;
   width: 100%;
-  /* Caps the visual's rendered height on short viewports: .body below has
-     no explicit width (fills .window) and aspect-ratio: 16/10, so bounding
-     .window's width also bounds .body's height (width / 1.6), scaling down
-     with viewport height instead of only with content width. */
-  max-width: clamp(352px, 64vh, 704px);
+  max-width: 100%;
+  max-height: 100%;
   margin-inline: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .titlebar {
@@ -48,6 +47,8 @@
 .body {
   position: relative;
   aspect-ratio: 16 / 10;
+  flex: 1 1 auto;
+  min-height: 0;
   background-image: var(--shell-gradient), var(--shell-dot-grid);
   background-size:
     100% 100%,

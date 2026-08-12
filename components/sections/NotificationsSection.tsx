@@ -1,11 +1,13 @@
-import PinnedSection from "@/components/PinnedSection";
+import StackSection from "@/components/StackSection";
 import PhoneFrame from "@/components/PhoneFrame";
 import styles from "./sections.module.css";
 
 export default function NotificationsSection() {
   return (
-    <PinnedSection id="notifications">
-      <div className={`${styles.container} ${styles.split}`}>
+    <StackSection id="notifications" z={5}>
+      <div
+        className={`${styles.container} ${styles.split} ${styles.fill} ${styles.centerY}`}
+      >
         <div>
           <p className={styles.eyebrow}>Reminders</p>
           <h2 className={styles.title}>
@@ -19,6 +21,6 @@ export default function NotificationsSection() {
         </div>
         <PhoneFrame label="Booking bot notifications — preview coming soon" />
       </div>
-    </PinnedSection>
+    </StackSection>
   );
 }

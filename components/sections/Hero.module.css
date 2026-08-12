@@ -1,11 +1,48 @@
+.root {
+  position: relative;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.glow {
+  position: absolute;
+  top: -14%;
+  left: 50%;
+  translate: -50% 0;
+  width: min(1100px, 130%);
+  aspect-ratio: 1;
+  background: radial-gradient(closest-side, var(--accent-glow), transparent 72%);
+  filter: blur(70px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.content h1 {
+  font-size: clamp(2rem, 3.5vw, 2.75rem);
+}
+
+.content .lede {
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
 .actions {
   display: flex;
   gap: 16px;
-  margin-top: 32px;
+  margin-top: 7px;
+}
+
+.content.stack > *:last-child {
+  margin-top: clamp(12px, 2vw, 24px);
 }
 
 .primary {
-  padding: 13px 24px;
+  padding: 11px 20px;
   font-size: 0.9375rem;
   font-weight: 500;
   background: var(--accent);
@@ -19,7 +56,7 @@
 }
 
 .secondary {
-  padding: 13px 24px;
+  padding: 11px 20px;
   font-size: 0.9375rem;
   font-weight: 500;
   color: var(--text);
@@ -33,6 +70,3 @@
   border-color: var(--accent);
 }
 
-.visual {
-  width: 100%;
-}

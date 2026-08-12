@@ -3,13 +3,13 @@ import styles from "./WindowChrome.module.css";
 import type { ReactNode } from "react";
 
 type WindowChromeProps = {
-  label: string;
+  label?: string;
   chip?: string;
   children?: ReactNode;
 };
 
 export default function WindowChrome({
-  label,
+  label = "Preview coming soon",
   chip,
   children,
 }: WindowChromeProps) {
@@ -21,7 +21,7 @@ export default function WindowChrome({
           <span className={styles.dot} />
           <span className={styles.dot} />
         </div>
-        <div className={styles.address}>{chip ?? "app.ordiset.com"}</div>
+        {chip && <div className={styles.address}>{chip}</div>}
       </div>
       <div className={styles.body}>
         {children ?? <Placeholder label={label} />}

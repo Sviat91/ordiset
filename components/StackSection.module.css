@@ -1,0 +1,33 @@
+.card {
+  position: sticky;
+  top: 0;
+  min-height: 100svh;
+  overflow: clip;
+  display: flex;
+  flex-direction: column;
+  padding-block: calc(var(--nav-h) + clamp(16px, 3vh, 32px)) clamp(24px, 5vh, 56px);
+  background: linear-gradient(180deg, var(--bg-elevated), var(--bg) 240px);
+  border-top: 1px solid var(--border-strong);
+  box-shadow: var(--shadow-stack);
+}
+
+.seam {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0.32;
+  pointer-events: none;
+}
+
+@media (max-width: 899px), (max-height: 700px) {
+  .card {
+    position: static;
+    min-height: 0;
+    padding-block: clamp(72px, 10vh, 120px);
+    box-shadow: none;
+    transform: none !important;
+  }
+}

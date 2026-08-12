@@ -1,11 +1,13 @@
-import PinnedSection from "@/components/PinnedSection";
+import StackSection from "@/components/StackSection";
 import PhoneFrame from "@/components/PhoneFrame";
 import styles from "./sections.module.css";
 
 export default function BookingSiteSection() {
   return (
-    <PinnedSection id="booking-site">
-      <div className={`${styles.container} ${styles.split} ${styles.visualFirst}`}>
+    <StackSection id="booking-site" z={4}>
+      <div
+        className={`${styles.container} ${styles.split} ${styles.visualFirst} ${styles.fill} ${styles.centerY}`}
+      >
         <div>
           <p className={styles.eyebrow}>Your booking site</p>
           <h2 className={styles.title}>A site your clients recognize</h2>
@@ -17,6 +19,6 @@ export default function BookingSiteSection() {
         </div>
         <PhoneFrame label="Client booking site — preview coming soon" />
       </div>
-    </PinnedSection>
+    </StackSection>
   );
 }

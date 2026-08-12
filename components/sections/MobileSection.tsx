@@ -1,11 +1,13 @@
-import PinnedSection from "@/components/PinnedSection";
+import StackSection from "@/components/StackSection";
 import PhoneFrame from "@/components/PhoneFrame";
 import styles from "./sections.module.css";
 
 export default function MobileSection() {
   return (
-    <PinnedSection id="mobile">
-      <div className={`${styles.container} ${styles.split}`}>
+    <StackSection id="mobile" z={3}>
+      <div
+        className={`${styles.container} ${styles.split} ${styles.fill} ${styles.centerY}`}
+      >
         <div>
           <p className={styles.eyebrow}>Mobile</p>
           <h2 className={styles.title}>Booking that feels native on a phone</h2>
@@ -17,6 +19,6 @@ export default function MobileSection() {
         </div>
         <PhoneFrame label="Mobile booking flow — preview coming soon" />
       </div>
-    </PinnedSection>
+    </StackSection>
   );
 }

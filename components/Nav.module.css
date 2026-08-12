@@ -1,22 +1,24 @@
 .nav {
   position: fixed;
-  top: 0;
-  inset-inline: 0;
+  top: var(--nav-top);
+  left: var(--gutter);
+  right: var(--gutter);
+  max-width: var(--maxw);
+  margin-inline: auto;
   z-index: 50;
-  height: var(--nav-h);
-  background: rgba(18, 20, 23, 0.72);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
 }
 
 .row {
-  max-width: var(--maxw);
-  margin-inline: auto;
-  padding-inline: var(--gutter);
-  height: 100%;
+  height: var(--nav-pill-h);
+  border-radius: var(--radius-pill);
+  background: rgba(26, 29, 33, 0.72);
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--border-strong);
+  box-shadow: 0 14px 34px -14px rgba(0, 0, 0, 0.7);
+  padding-inline: 14px 10px;
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 28px;
 }
 
 .brand {
@@ -27,16 +29,24 @@
 }
 
 .mark {
-  display: block;
-  width: 28px;
-  height: 28px;
+  --mark-size: 30px;
+  --crop: 680; /* square crop side, source px */
+  --crop-x: 866; /* crop origin x, source px */
+  --crop-y: 202; /* crop origin y, source px */
+  position: relative;
+  width: var(--mark-size);
+  height: var(--mark-size);
   overflow: hidden;
+  flex: none;
 }
 
 .markImg {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+  position: absolute;
+  max-width: none; /* required: globals.css sets img { max-width: 100% } */
+  width: calc(var(--mark-size) * 2400 / var(--crop));
+  height: auto;
+  left: calc(var(--mark-size) * var(--crop-x) / var(--crop) * -1);
+  top: calc(var(--mark-size) * var(--crop-y) / var(--crop) * -1);
 }
 
 .wordmark {
@@ -47,6 +57,7 @@
 }
 
 .links {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 28px;
@@ -60,6 +71,15 @@
 
 .link:hover {
   color: var(--text);
+}
+
+.indicator {
+  position: absolute;
+  bottom: -6px;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--accent);
+  pointer-events: none;
 }
 
 .cta {

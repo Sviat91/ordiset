@@ -1,4 +1,10 @@
 .section {
+  position: relative;
+  z-index: 6;
+  background: var(--bg);
+  min-height: 100svh;
+  border-top: 1px solid var(--border-strong);
+  box-shadow: var(--shadow-stack);
   padding: clamp(96px, 12vh, 160px) 0;
 }
 
