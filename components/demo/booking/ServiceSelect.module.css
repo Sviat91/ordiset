@@ -1,0 +1,95 @@
+.root {
+  position: relative;
+  flex: none;
+}
+
+.trigger {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 14px 16px;
+  background: var(--lb-card);
+  border: 1px solid var(--lb-border);
+  border-radius: var(--lb-r-card);
+  color: var(--lb-text);
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.trigger:hover {
+  background: var(--lb-tint);
+}
+
+.triggerLabel {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.list {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  max-height: 240px;
+  overflow-y: auto;
+  background: var(--lb-card);
+  border: 1px solid var(--lb-border);
+  border-radius: var(--lb-r-card);
+  box-shadow: var(--lb-shadow);
+  list-style: none;
+  margin: 0;
+  padding: 6px;
+  z-index: 20;
+}
+
+.row {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: left;
+  border: none;
+  background: transparent;
+  border-radius: 8px;
+  padding: 8px 10px;
+  cursor: pointer;
+}
+
+.row:hover {
+  background: var(--lb-tint);
+}
+
+.rowName {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--lb-text);
+}
+
+.rowMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--lb-muted);
+}
+
+.rowPrices {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.priceOriginal {
+  text-decoration: line-through;
+  color: var(--lb-muted);
+}
+
+.priceDiscounted {
+  color: var(--lb-primary);
+  font-weight: 600;
+}

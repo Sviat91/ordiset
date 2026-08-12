@@ -1,0 +1,26 @@
+.footer {
+  flex: none;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding-inline: 32px;
+  border-top: 1px solid var(--lb-border);
+  background: var(--lb-card);
+  font-size: 0.75rem;
+  color: var(--lb-muted);
+}
+
+.link {
+  color: var(--lb-muted);
+}
+
+.sep {
+  color: var(--lb-border);
+}
+
+.divider {
+  color: var(--lb-border);
+  margin-inline: 4px;
+}

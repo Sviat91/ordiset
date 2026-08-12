@@ -1,0 +1,54 @@
+.root {
+  position: absolute;
+  inset: 0;
+  color-scheme: light;
+  --lb-bg: #f8f9fa;
+  --lb-tint: #eaecee;
+  --lb-card: #ffffff;
+  --lb-primary: #b35c37;
+  --lb-on-primary: #ffffff;
+  --lb-text: #1a1d20;
+  --lb-muted: #6c757d;
+  --lb-border: #e2e8f0;
+  --lb-r-card: 12px;
+  --lb-r-pill: 999px;
+  --lb-shadow: 0 12px 32px -16px rgba(0, 0, 0, 0.35);
+}
+
+.root[data-theme="dark"] {
+  color-scheme: dark;
+  --lb-bg: #121417;
+  --lb-tint: #22262b;
+  --lb-card: #1a1d22;
+  --lb-primary: #d0764d;
+  --lb-on-primary: #121417;
+  --lb-text: #f1f3f5;
+  --lb-muted: #8b95a1;
+  --lb-border: #2d3239;
+}
+
+.root :focus-visible {
+  outline: 2px solid var(--lb-primary);
+  outline-offset: 2px;
+}
+
+.viewport {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--lb-bg);
+}
+
+.canvas {
+  width: 1280px;
+  height: 800px;
+  flex: none;
+  overflow: hidden;
+  transform-origin: center center;
+  transition: opacity 0.2s ease;
+  background: var(--lb-bg);
+  color: var(--lb-text);
+}

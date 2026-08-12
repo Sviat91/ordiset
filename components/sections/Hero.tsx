@@ -1,5 +1,6 @@
 import StackSection from "@/components/StackSection";
 import WindowChrome from "@/components/WindowChrome";
+import DemoApp from "@/components/demo/DemoApp";
 import styles from "./sections.module.css";
 import heroStyles from "./Hero.module.css";
 
@@ -29,7 +30,9 @@ export default function Hero() {
             </a>
           </div>
           <div className={styles.grow}>
-            <WindowChrome />
+            <WindowChrome chip="demo.ordiset.com">
+              <DemoApp />
+            </WindowChrome>
           </div>
         </div>
       </div>
