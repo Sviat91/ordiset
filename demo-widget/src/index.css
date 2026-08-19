@@ -1,0 +1,163 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 248 249 250;
+  --foreground: 26 29 32;
+  --card: 255 255 255;
+  --card-foreground: 26 29 32;
+  --primary: 179 92 55;
+  --primary-foreground: 26 29 32;
+  --secondary: 234 236 238;
+  --secondary-foreground: 26 29 32;
+  --muted: 234 236 238;
+  --muted-foreground: 108 117 125;
+  --accent: 234 236 238;
+  --accent-foreground: 26 29 32;
+  --border: 226 232 240;
+  --ring: 179 92 55;
+  --radius: 0.75rem;
+
+  /* Material Design 3 container tokens — ported verbatim from the real
+     src/styles/m3-tokens.css (dashboard stat tiles, calendar day-off/
+     available-slot backgrounds). */
+  --md-primary-container: #ffd9dc;
+  --md-on-primary-container: #3b0017;
+  --md-secondary-container: #ffdcca;
+  --md-on-secondary-container: #2f1509;
+  --md-tertiary-container: #ffdfa3;
+  --md-on-tertiary-container: #271900;
+  --md-surface-container-high: #f3e3e4;
+  --md-on-surface: #211a1b;
+}
+
+.dark {
+  --background: 18 20 23;
+  --foreground: 241 243 245;
+  --card: 26 29 34;
+  --card-foreground: 241 243 245;
+  --primary: 208 118 77;
+  --primary-foreground: 241 243 245;
+  --secondary: 34 38 43;
+  --secondary-foreground: 241 243 245;
+  --muted: 34 38 43;
+  --muted-foreground: 139 149 161;
+  --accent: 34 38 43;
+  --accent-foreground: 241 243 245;
+  --border: 45 50 57;
+  --ring: 208 118 77;
+
+  --md-primary-container: #723340;
+  --md-on-primary-container: #ffd9dc;
+  --md-secondary-container: #634432;
+  --md-on-secondary-container: #ffdcca;
+  --md-tertiary-container: #5e4200;
+  --md-on-tertiary-container: #ffdfa3;
+  --md-surface-container-high: #312829;
+  --md-on-surface: #ede1e1;
+}
+
+body {
+  margin: 0;
+  font-family: 'Roboto', system-ui, sans-serif;
+  color: rgb(var(--foreground));
+  background-color: rgb(var(--background));
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Buttons — ported from the real globals.css */
+.btn {
+  @apply rounded-full px-4 py-2 text-sm font-medium transition-colors disabled:opacity-50;
+}
+.btn-primary {
+  background-color: rgb(var(--primary));
+  color: rgb(var(--foreground));
+}
+.btn-primary:hover {
+  opacity: 0.9;
+}
+.btn-outline {
+  border: 1px solid rgb(var(--border));
+  color: rgb(var(--foreground));
+  background: transparent;
+}
+.btn-outline:hover {
+  background-color: rgb(var(--accent));
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-in-up {
+  animation: fade-in-up 0.5s ease-in-out;
+}
+
+/* react-day-picker v9 overrides. v9 renamed most classes from the v8 names
+   this file originally had (.rdp-day was the clickable circle in v8; in v9
+   it's just the grid cell, and the circle is the separate .rdp-day_button)
+   — the old selectors here were silently matching nothing, leaving the
+   calendar to render at react-day-picker's own default size/colors (44px
+   cells, default blue accent) instead of the app's design. */
+.rdp-root {
+  margin: 0 !important;
+}
+
+.rdp-month_caption,
+.rdp-nav {
+  display: none !important;
+}
+
+.rdp-weekday {
+  font-weight: 500 !important;
+  font-size: 12px !important;
+  color: rgb(var(--muted-foreground)) !important;
+}
+
+.rdp-day_button {
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 9999px !important;
+  border: none !important;
+  background: none !important;
+  font-size: 14px !important;
+  transition: background-color 0.2s ease !important;
+}
+
+/* Modifier classes (available/selected/disabled/outside) land on the .rdp-day
+   cell, not the nested button — same pattern the library's own stylesheet
+   uses for `.rdp-selected .rdp-day_button`. */
+.rdp-available .rdp-day_button {
+  background-color: color-mix(in oklab, rgb(var(--accent)) 40%, transparent) !important;
+}
+.rdp-available .rdp-day_button:hover {
+  background-color: color-mix(in oklab, rgb(var(--accent)) 60%, transparent) !important;
+}
+.rdp-selected .rdp-day_button {
+  background-color: rgb(var(--primary)) !important;
+  color: rgb(var(--foreground)) !important;
+}
+.rdp-disabled .rdp-day_button {
+  opacity: 0.3 !important;
+  pointer-events: none !important;
+}
+.rdp-outside .rdp-day_button {
+  opacity: 0.5 !important;
+}

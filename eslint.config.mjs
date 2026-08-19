@@ -12,6 +12,10 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // demo-widget is its own Vite project with its own lint setup, and
+    // public/demo-app is its built (minified) output copied in for embedding.
+    "demo-widget/**",
+    "public/demo-app/**",
   ]),
 ]);
 

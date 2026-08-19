@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <title>Loom & Blade — demo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      (function () {
+        // Demo defaults to dark unless the visitor explicitly picked light
+        // via ThemeToggle (ported from the real layout.tsx pattern, but the
+        // no-saved-preference fallback is dark here, not system preference —
+        // this is a dark-branded demo site, not a real tenant).
+        try {
+          var saved = localStorage.getItem('theme')
+          var isDark = saved !== 'light'
+          if (isDark) {
+            document.documentElement.classList.add('dark')
+          }
+          // Pre-apply any saved Settings accent color before mount, same
+          // reasoning as the dark-class check above — avoids a flash of the
+          // default accent for a returning visitor who customized it.
+          var brandRaw = localStorage.getItem('ordiset-demo-brand')
+          if (brandRaw) {
+            var brand = JSON.parse(brandRaw)
+            var accent = isDark ? brand.darkAccent : brand.lightAccent
+            if (accent) {
+              document.documentElement.style.setProperty('--primary', accent)
+              document.documentElement.style.setProperty('--ring', accent)
+            }
+          }
+        } catch (e) {}
+      })()
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

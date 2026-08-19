@@ -1,6 +1,5 @@
+import Image from "next/image";
 import StackSection from "@/components/StackSection";
-import WindowChrome from "@/components/WindowChrome";
-import DemoApp from "@/components/demo/DemoApp";
 import styles from "./sections.module.css";
 import heroStyles from "./Hero.module.css";
 
@@ -17,9 +16,10 @@ export default function Hero() {
           <p className={`${styles.body} ${heroStyles.lede}`}>
             Ordiset gives salons, barbershops, studios, clinics and
             independent pros their own branded booking site — scheduling,
-            reminders and client history included. No marketplace, no shared
-            traffic. Just your business, running on infrastructure built for
-            it.
+            reminders and client history included. Every color, photo and
+            detail is yours to customize from one admin panel, and changes go
+            live instantly. No marketplace, no shared traffic — just your
+            business, looking exactly like your business.
           </p>
           <div className={heroStyles.actions}>
             <a href="#contact" className={heroStyles.primary}>
@@ -30,9 +30,36 @@ export default function Hero() {
             </a>
           </div>
           <div className={styles.grow}>
-            <WindowChrome chip="demo.ordiset.com">
-              <DemoApp />
-            </WindowChrome>
+            <div className={heroStyles.showcase}>
+              <div className={`${heroStyles.shot} ${heroStyles.shotLeft}`}>
+                <Image
+                  src="/demo-shots/about.png"
+                  alt="Ordiset demo — About page, light theme"
+                  fill
+                  sizes="300px"
+                  className={heroStyles.shotImg}
+                />
+              </div>
+              <div className={`${heroStyles.shot} ${heroStyles.shotCenter}`}>
+                <Image
+                  src="/demo-shots/home.png"
+                  alt="Ordiset demo — specialist selection"
+                  fill
+                  sizes="320px"
+                  className={heroStyles.shotImg}
+                  priority
+                />
+              </div>
+              <div className={`${heroStyles.shot} ${heroStyles.shotRight}`}>
+                <Image
+                  src="/demo-shots/booking.png"
+                  alt="Ordiset demo — booking calendar"
+                  fill
+                  sizes="300px"
+                  className={heroStyles.shotImg}
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>

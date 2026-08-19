@@ -27,14 +27,15 @@
 }
 
 .content .lede {
-  font-size: 0.875rem;
-  line-height: 1.5;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-top: 6px;
 }
 
 .actions {
   display: flex;
   gap: 16px;
-  margin-top: 7px;
+  margin-top: 20px;
 }
 
 .content.stack > *:last-child {
@@ -68,5 +69,56 @@
 
 .secondary:hover {
   border-color: var(--accent);
+}
+
+.showcase {
+  position: relative;
+  width: 100%;
+  min-height: 220px;
+}
+
+.shot {
+  position: absolute;
+  top: 36%;
+  left: 50%;
+  width: clamp(170px, 24vw, 300px);
+  aspect-ratio: 16 / 10;
+  border-radius: var(--radius-window);
+  border: 1px solid var(--border-strong);
+  box-shadow: var(--shadow-window);
+  background: var(--surface);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.shotImg {
+  object-fit: cover;
+}
+
+.shotLeft {
+  transform: translate(-108%, -42%) rotate(-8deg);
+  z-index: 1;
+}
+
+.shotCenter {
+  transform: translate(-50%, -56%) rotate(0deg);
+  z-index: 3;
+}
+
+.shotRight {
+  transform: translate(8%, -42%) rotate(8deg);
+  z-index: 2;
+}
+
+.showcase:hover .shotLeft {
+  transform: translate(-114%, -46%) rotate(-11deg);
+}
+
+.showcase:hover .shotRight {
+  transform: translate(14%, -46%) rotate(11deg);
+}
+
+.showcase:hover .shotCenter {
+  transform: translate(-50%, -60%) scale(1.03);
 }
 
