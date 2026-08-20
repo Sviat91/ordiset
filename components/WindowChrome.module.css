@@ -54,3 +54,8 @@
     100% 100%,
     16px 16px;
 }
+
+.bodyFull {
+  aspect-ratio: auto;
+  height: 100%;
+}

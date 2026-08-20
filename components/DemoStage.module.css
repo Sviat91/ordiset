@@ -1,0 +1,20 @@
+.stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  /* Fallback for when an ancestor's height is indefinite (the site's
+     max-width:899px / max-height:700px static-layout mode) — only binds
+     there, since sticky mode always supplies a definite, taller box. */
+  min-height: min(72svh, 640px);
+}
+
+.frame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 0;
+  display: block;
+  transform-origin: 0 0;
+  transition: opacity 0.2s ease;
+}

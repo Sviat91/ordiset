@@ -7,7 +7,7 @@ import styles from "./Nav.module.css";
 
 const LINKS = [
   { href: "#overview", label: "Overview" },
-  { href: "#customize", label: "Customize" },
+  { href: "#preview", label: "Preview" },
   { href: "#mobile", label: "Mobile" },
   { href: "#booking-site", label: "Booking site" },
   { href: "#notifications", label: "Notifications" },
@@ -15,7 +15,7 @@ const LINKS = [
 
 const SECTION_IDS = [
   "overview",
-  "customize",
+  "preview",
   "mobile",
   "booking-site",
   "notifications",
