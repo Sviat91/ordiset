@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { motion, useReducedMotion, useScroll, useMotionValueEvent } from "framer-motion";
+import { getSectionTops, getSectionTop } from "@/lib/sections";
 import styles from "./Nav.module.css";
 
 const LINKS = [
@@ -13,15 +14,6 @@ const LINKS = [
   { href: "#notifications", label: "Notifications" },
 ];
 
-const SECTION_IDS = [
-  "overview",
-  "preview",
-  "mobile",
-  "booking-site",
-  "notifications",
-  "contact",
-];
-
 function computeActiveId(): string | null {
   const line = window.scrollY + window.innerHeight / 2;
   let activeId: string | null = null;
@@ -30,21 +22,6 @@ function computeActiveId(): string | null {
     activeId = id;
   }
   return activeId;
-}
-
-function getSectionTops(): { id: string; top: number }[] {
-  let runningTotal = 0;
-  const tops: { id: string; top: number }[] = [];
-  for (const id of SECTION_IDS) {
-    tops.push({ id, top: runningTotal });
-    const el = document.getElementById(id);
-    if (el) runningTotal += el.offsetHeight;
-  }
-  return tops;
-}
-
-function getSectionTop(id: string): number {
-  return getSectionTops().find((entry) => entry.id === id)?.top ?? 0;
 }
 
 // No hamburger/drawer in this pass — below 768px the link list is hidden

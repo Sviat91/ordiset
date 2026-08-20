@@ -22,6 +22,7 @@
   pointer-events: none;
 }
 
+/* components/ScrollDock.tsx mirrors this exact query string (STATIC_STACK_QUERY) — update both together if the breakpoint ever changes */
 @media (max-width: 899px), (max-height: 700px) {
   .card {
     position: static;

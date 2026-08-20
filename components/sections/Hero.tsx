@@ -1,7 +1,23 @@
+"use client";
+
 import Image from "next/image";
 import StackSection from "@/components/StackSection";
+import { getSectionTop } from "@/lib/sections";
 import styles from "./sections.module.css";
 import heroStyles from "./Hero.module.css";
+
+function scrollToSection(id: string) {
+  return (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    window.scrollTo({
+      top: getSectionTop(id),
+      behavior: prefersReducedMotion ? "auto" : "smooth",
+    });
+  };
+}
 
 export default function Hero() {
   return (
@@ -22,10 +38,18 @@ export default function Hero() {
             business, looking exactly like your business.
           </p>
           <div className={heroStyles.actions}>
-            <a href="#contact" className={heroStyles.primary}>
+            <a
+              href="#contact"
+              className={heroStyles.primary}
+              onClick={scrollToSection("contact")}
+            >
               Get in touch
             </a>
-            <a href="#mobile" className={heroStyles.secondary}>
+            <a
+              href="#preview"
+              className={heroStyles.secondary}
+              onClick={scrollToSection("preview")}
+            >
               See how it works
             </a>
           </div>
