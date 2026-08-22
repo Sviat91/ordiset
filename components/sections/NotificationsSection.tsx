@@ -4,7 +4,7 @@ import styles from "./sections.module.css";
 
 export default function NotificationsSection() {
   return (
-    <StackSection id="notifications" z={5}>
+    <StackSection id="notifications" z={6}>
       <div
         className={`${styles.container} ${styles.split} ${styles.fill} ${styles.centerY}`}
       >

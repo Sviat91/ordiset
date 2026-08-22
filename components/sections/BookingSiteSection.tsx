@@ -4,7 +4,7 @@ import styles from "./sections.module.css";
 
 export default function BookingSiteSection() {
   return (
-    <StackSection id="booking-site" z={4}>
+    <StackSection id="booking-site" z={5}>
       <div
         className={`${styles.container} ${styles.split} ${styles.visualFirst} ${styles.fill} ${styles.centerY}`}
       >

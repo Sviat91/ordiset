@@ -4,7 +4,7 @@ import styles from "./sections.module.css";
 
 export default function MobileSection() {
   return (
-    <StackSection id="mobile" z={3}>
+    <StackSection id="mobile" z={4}>
       <div
         className={`${styles.container} ${styles.split} ${styles.fill} ${styles.centerY}`}
       >

@@ -3,16 +3,16 @@ import WindowChrome from "@/components/WindowChrome";
 import DemoStage from "@/components/DemoStage";
 import styles from "./sections.module.css";
 
-export default function PreviewSection() {
+export default function AdminPanelSection() {
   return (
-    <StackSection id="preview" z={2}>
+    <StackSection id="admin" z={3}>
       <div className={`${styles.containerWide} ${styles.fill}`}>
         <div className={styles.growFull}>
           <WindowChrome chrome={false}>
             <DemoStage
               src="/demo-app/index.html"
-              title="Ordiset live demo"
-              reloadOnStorageKey="ordiset-demo-brand"
+              title="Ordiset admin panel demo"
+              autoClickText="View admin demo"
             />
           </WindowChrome>
         </div>

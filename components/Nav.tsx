@@ -9,6 +9,7 @@ import styles from "./Nav.module.css";
 const LINKS = [
   { href: "#overview", label: "Overview" },
   { href: "#preview", label: "Preview" },
+  { href: "#admin", label: "Admin panel" },
   { href: "#mobile", label: "Mobile" },
   { href: "#booking-site", label: "Booking site" },
   { href: "#notifications", label: "Notifications" },

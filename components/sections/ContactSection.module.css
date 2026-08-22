@@ -1,6 +1,6 @@
 .section {
   position: relative;
-  z-index: 6;
+  z-index: 7;
   background: var(--bg);
   min-height: 100svh;
   border-top: 1px solid var(--border-strong);

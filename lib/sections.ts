@@ -1,6 +1,7 @@
 const SECTION_IDS = [
   "overview",
   "preview",
+  "admin",
   "mobile",
   "booking-site",
   "notifications",

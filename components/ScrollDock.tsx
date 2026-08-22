@@ -74,6 +74,17 @@ export default function ScrollDock() {
   // the handler runs, so reading window.scrollY inside arm() would race
   // and could observe the post-scroll position, making every gesture look
   // like zero net movement.
+  //
+  // KNOWN LIMITATION (not fixed, low priority — revisit if it's ever
+  // actually noticed): restYRef only updates when settle() runs. If a real
+  // wheel/touch gesture interrupts an already in-flight, unarmed
+  // programmatic scroll (Nav/Hero click) *before* that scroll has gone
+  // quiet for SETTLE_MS, the eventual dock decision is computed against the
+  // stale pre-click position instead of where the interruption actually
+  // happened, which can flip the inferred direction and dock to the wrong
+  // section. Requires precise timing (wheeling mid-animation of a nav
+  // click) to trigger; not reproduced in manual testing. Full counter-example
+  // and reasoning: git history, commit 51b948c, handoff/scroll-snap-v2_feedback.md.
   const restYRef = useRef(0);
   const timerRef = useRef<number | null>(null);
 
