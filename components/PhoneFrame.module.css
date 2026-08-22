@@ -1,5 +1,5 @@
 .phone {
-  width: min(clamp(240px, 26vw, 300px), calc(62svh * 9 / 19.5));
+  width: min(clamp(288px, 31.2vw, 360px), calc(74.4svh * 9 / 19.5));
   aspect-ratio: 9 / 19.5;
   border-radius: var(--radius-phone);
   border: 1px solid var(--border-strong);

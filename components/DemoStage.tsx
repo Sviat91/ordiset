@@ -17,6 +17,16 @@ type DemoStageProps = {
   /** If set, watches this localStorage key for changes made by another
    *  same-origin embed and reloads this iframe when it changes. */
   reloadOnStorageKey?: string;
+  /** If set, renders the embedded document at this fixed CSS-px size
+   *  (e.g. a real phone viewport) uniformly scaled to fit the box, and
+   *  lets it scroll internally like a real device instead of auto-fitting
+   *  its height. Use for embeds the visitor navigates around in — without
+   *  this, `minViewportHeight`'s scale-to-fit only ever grows (see
+   *  `syncNeed`), so visiting a taller in-app page permanently shrinks
+   *  every other page of the same embed. Mutually exclusive in effect
+   *  with `minViewportHeight`/auto-fit; content-height tracking is
+   *  skipped entirely when this is set. */
+  fixedViewport?: { width: number; height: number };
 };
 
 export default function DemoStage({
@@ -25,6 +35,7 @@ export default function DemoStage({
   minViewportHeight = 800,
   autoClickText,
   reloadOnStorageKey,
+  fixedViewport,
 }: DemoStageProps) {
   const ref = useRef<HTMLDivElement>(null);
   const iframeRef = useRef<HTMLIFrameElement>(null);
@@ -75,6 +86,11 @@ export default function DemoStage({
   const handleLoad = () => {
     clickedRef.current = false;
     setLoadNonce((n) => n + 1);
+    // Fixed-viewport embeds (e.g. the phone-frame mobile preview) never
+    // auto-fit height — content taller than the fixed viewport scrolls
+    // internally instead, like a real device. Content-height tracking
+    // would be both unused and wasted work here.
+    if (fixedViewport) return;
     syncNeed();
     // Watch the embedded document's own content height continuously, so
     // any post-load change (in-app navigation, sidebar collapse/expand,
@@ -217,7 +233,22 @@ export default function DemoStage({
 
   const hasBox = box !== null && box.h > 0;
   let style: React.CSSProperties;
-  if (hasBox) {
+  if (hasBox && fixedViewport) {
+    // Fill the box completely (like object-fit: cover) rather than
+    // driving scale off content height — the size never changes as the
+    // visitor navigates inside the embed. The box's aspect ratio is only
+    // ever approximately the fixed viewport's (frame padding/border skew
+    // it slightly), so `min` here would leave a visible gap on one axis;
+    // `max` overscans by a sliver instead, clipped by the frame's own
+    // `overflow: hidden` — invisible in practice, unlike a gap.
+    const s = Math.max(box.w / fixedViewport.width, box.h / fixedViewport.height);
+    style = {
+      width: fixedViewport.width,
+      height: fixedViewport.height,
+      transform: `scale(${s})`,
+      opacity: 1,
+    };
+  } else if (hasBox) {
     const cssH = Math.max(box.h, needH);
     const s = box.h / cssH;
     const width = Math.ceil(box.w / s);

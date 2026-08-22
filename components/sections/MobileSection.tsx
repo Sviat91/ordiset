@@ -1,5 +1,6 @@
 import StackSection from "@/components/StackSection";
 import PhoneFrame from "@/components/PhoneFrame";
+import DemoStage from "@/components/DemoStage";
 import styles from "./sections.module.css";
 
 export default function MobileSection() {
@@ -17,7 +18,13 @@ export default function MobileSection() {
             time, confirm. No app to install, no account to create.
           </p>
         </div>
-        <PhoneFrame label="Mobile booking flow — preview coming soon" />
+        <PhoneFrame label="Mobile booking flow — preview coming soon">
+          <DemoStage
+            src="/demo-app/index.html"
+            title="Ordiset live demo (mobile)"
+            fixedViewport={{ width: 390, height: 844 }}
+          />
+        </PhoneFrame>
       </div>
     </StackSection>
   );
