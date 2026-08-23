@@ -51,6 +51,7 @@
   background: var(--accent);
   color: var(--on-accent);
   border-radius: var(--radius-pill);
+  cursor: pointer;
   transition: background 0.15s ease;
 }
 

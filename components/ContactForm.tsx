@@ -7,7 +7,7 @@ import styles from "./ContactForm.module.css";
 type FieldName = "name" | "email" | "message";
 type Values = Record<FieldName, string>;
 type Errors = Partial<Record<FieldName, string>>;
-type Status = "idle" | "submitting" | "sent";
+type Status = "idle" | "submitting" | "sent" | "error";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -84,10 +84,19 @@ export default function ContactForm() {
     }
 
     setStatus("submitting");
-    // TODO: wire to a real endpoint — out of scope for this pass
-    await new Promise((resolve) => setTimeout(resolve, 600));
-    setStatus("sent");
-    setValues(initialValues);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      });
+      if (!res.ok) throw new Error("Request failed");
+      setStatus("sent");
+      setValues(initialValues);
+      setTouched({});
+    } catch {
+      setStatus("error");
+    }
   }
 
   return (
@@ -172,6 +181,12 @@ export default function ContactForm() {
       {status === "sent" && (
         <p role="status" className={styles.success}>
           Thanks — we&apos;ll be in touch shortly.
+        </p>
+      )}
+
+      {status === "error" && (
+        <p role="alert" className={styles.error}>
+          Something went wrong — please try again in a moment.
         </p>
       )}
     </form>
