@@ -1,0 +1,51 @@
+.showcase {
+  position: relative;
+  width: 100%;
+  min-height: 340px;
+}
+
+.shot {
+  position: absolute;
+  top: 38%;
+  left: 50%;
+  width: clamp(220px, 30vw, 400px);
+  aspect-ratio: 16 / 10;
+  border-radius: var(--radius-window);
+  border: 1px solid var(--border-strong);
+  box-shadow: var(--shadow-window);
+  background: var(--surface);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.shotImg {
+  object-fit: cover;
+  object-position: top;
+}
+
+.shotLeft {
+  transform: translate(-104%, -30%) rotate(-8deg);
+  z-index: 1;
+}
+
+.shotCenter {
+  transform: translate(-50%, -40%) rotate(0deg);
+  z-index: 3;
+}
+
+.shotRight {
+  transform: translate(4%, -30%) rotate(8deg);
+  z-index: 2;
+}
+
+.showcase:hover .shotLeft {
+  transform: translate(-110%, -34%) rotate(-11deg);
+}
+
+.showcase:hover .shotRight {
+  transform: translate(10%, -34%) rotate(11deg);
+}
+
+.showcase:hover .shotCenter {
+  transform: translate(-50%, -44%) scale(1.03);
+}
