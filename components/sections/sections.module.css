@@ -99,3 +99,24 @@
   }
 }
 
+.mobileOnly {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* Mirrors STATIC_STACK_QUERY in components/ScrollDock.tsx — keep in sync */
+@media (max-width: 899px), (max-height: 700px) {
+  .desktopOnly {
+    display: none;
+  }
+}
+
+@media (min-width: 900px) and (min-height: 701px) {
+  .mobileOnly {
+    display: none;
+  }
+}
+
