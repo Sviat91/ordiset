@@ -10,24 +10,28 @@ interface AdminSidebarProps {
   open: boolean
   onToggleOpen: () => void
   onBackToSite: () => void
+  alwaysVisible?: boolean
 }
 
 // Ported from the real AdminSidebar.tsx: w-60 expanded / w-[72px] collapsed,
 // labels hidden entirely when collapsed (not just clipped), theme toggle +
 // user block in the footer (not the topbar — matches the real split).
-export default function AdminSidebar({ section, onNavigate, open, onToggleOpen, onBackToSite }: AdminSidebarProps) {
+export default function AdminSidebar({ section, onNavigate, open, onToggleOpen, onBackToSite, alwaysVisible = false }: AdminSidebarProps) {
   const { brand, isDirty, saveDraft } = useBrand()
   return (
     <aside
       className={cn(
-        'hidden lg:flex h-full flex-col overflow-hidden border-r border-border bg-card transition-[width] duration-200 ease-out',
+        alwaysVisible ? 'flex' : 'hidden lg:flex',
+        'h-full flex-col overflow-hidden border-r border-border bg-card transition-[width] duration-200 ease-out',
         open ? 'w-60' : 'w-[72px]'
       )}
     >
       <div className="flex h-16 items-center gap-2 border-b border-border px-4">
-        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-primary/10 text-primary">
-          <Scissors className="h-4 w-4" />
-        </div>
+        {open && (
+          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-primary/10 text-primary">
+            <Scissors className="h-4 w-4" />
+          </div>
+        )}
         {open && <span className="truncate text-sm font-medium text-foreground">{brand.name}</span>}
         <button
           onClick={onToggleOpen}

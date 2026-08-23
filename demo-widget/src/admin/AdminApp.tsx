@@ -83,7 +83,7 @@ export default function AdminApp() {
             <button onClick={() => setMobileMenuOpen(false)} className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-md text-muted-foreground">
               <X className="h-4 w-4" />
             </button>
-            <AdminSidebar section={section} onNavigate={handleNavigate} open={true} onToggleOpen={() => {}} onBackToSite={navigateHome} />
+            <AdminSidebar section={section} onNavigate={handleNavigate} open={true} onToggleOpen={() => {}} onBackToSite={navigateHome} alwaysVisible />
           </div>
         </div>
       )}

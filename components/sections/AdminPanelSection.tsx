@@ -7,7 +7,7 @@ export default function AdminPanelSection() {
   return (
     <StackSection id="admin" z={3}>
       <div className={`${styles.containerWide} ${styles.fill}`}>
-        <div className={styles.growFull}>
+        <div className={`${styles.growFull}`}>
           <WindowChrome chrome={false}>
             <DemoStage
               src="/demo-app/index.html"

@@ -106,25 +106,6 @@ export default function DemoStage({
         ro.observe(doc.documentElement);
         contentRoRef.current = ro;
       }
-      // The vendored demo's collapsed admin sidebar is a fixed 72px-wide
-      // <aside>, but its header row (logo icon + collapse toggle, with
-      // gap-2 and 16px inline padding on each side) needs ~104px to fit
-      // both without overlap — the toggle button's own right edge lands
-      // ~16px past the aside's boundary, visually crossing its border.
-      // Dropping just this row's own inline padding lets both 32px icons
-      // + the existing 8px gap land flush inside the 72px rail with zero
-      // overflow (16+32+8+32+16=104 → 0+32+8+32+0=72). Scoped to the
-      // collapsed width's own class so the (differently-sized) expanded
-      // header is untouched. Runtime-only override (never touches the
-      // vendored bundle on disk, so it survives a demo rebuild being a
-      // no-op if the markup changes).
-      if (doc && !doc.getElementById("__sidebar-clip-fix")) {
-        const style = doc.createElement("style");
-        style.id = "__sidebar-clip-fix";
-        style.textContent =
-          "aside.w-\\[72px\\] > div:first-child { padding-left: 0 !important; padding-right: 0 !important; }";
-        doc.head?.appendChild(style);
-      }
     } catch {
       // cross-origin or not yet accessible; ignore
     }
