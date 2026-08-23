@@ -1,5 +1,5 @@
 .phone {
-  width: min(clamp(288px, 31.2vw, 360px), calc(74.4svh * 9 / 19.5));
+  width: var(--phone-width, min(clamp(288px, 31.2vw, 360px), calc(74.4svh * 9 / 19.5)));
   aspect-ratio: 9 / 19.5;
   border-radius: var(--radius-phone);
   border: 1px solid var(--border-strong);
@@ -23,11 +23,11 @@
 
 .island {
   position: absolute;
-  top: 10px;
+  top: var(--island-top, 10px);
   left: 50%;
   transform: translateX(-50%);
-  width: 78px;
-  height: 22px;
+  width: var(--island-width, 78px);
+  height: var(--island-height, 22px);
   border-radius: var(--radius-pill);
   background: var(--bg);
   z-index: 1;

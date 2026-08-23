@@ -55,6 +55,15 @@ export default function Hero() {
           </div>
           <div className={styles.grow}>
             <div className={heroStyles.showcase}>
+              <div className={`${heroStyles.shot} ${heroStyles.shotFarLeft}`}>
+                <Image
+                  src="/demo-shots/aura-specialists.png"
+                  alt="Ordiset demo — Aura Massage & Relax, specialist selection"
+                  fill
+                  sizes="300px"
+                  className={heroStyles.shotImg}
+                />
+              </div>
               <div className={`${heroStyles.shot} ${heroStyles.shotLeft}`}>
                 <Image
                   src="/demo-shots/about.png"
@@ -78,6 +87,15 @@ export default function Hero() {
                 <Image
                   src="/demo-shots/booking.png"
                   alt="Ordiset demo — booking calendar"
+                  fill
+                  sizes="300px"
+                  className={heroStyles.shotImg}
+                />
+              </div>
+              <div className={`${heroStyles.shot} ${heroStyles.shotFarRight}`}>
+                <Image
+                  src="/demo-shots/blush-specialists.png"
+                  alt="Ordiset demo — Blush Nail Studio, specialist selection"
                   fill
                   sizes="300px"
                   className={heroStyles.shotImg}

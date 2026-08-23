@@ -95,6 +95,11 @@
   object-fit: cover;
 }
 
+.shotFarLeft {
+  transform: translate(-166%, -30%) rotate(-16deg);
+  z-index: 0;
+}
+
 .shotLeft {
   transform: translate(-108%, -42%) rotate(-8deg);
   z-index: 1;
@@ -110,12 +115,25 @@
   z-index: 2;
 }
 
+.shotFarRight {
+  transform: translate(66%, -30%) rotate(16deg);
+  z-index: 0;
+}
+
+.showcase:hover .shotFarLeft {
+  transform: translate(-172%, -34%) rotate(-19deg);
+}
+
 .showcase:hover .shotLeft {
   transform: translate(-114%, -46%) rotate(-11deg);
 }
 
 .showcase:hover .shotRight {
   transform: translate(14%, -46%) rotate(11deg);
+}
+
+.showcase:hover .shotFarRight {
+  transform: translate(72%, -34%) rotate(19deg);
 }
 
 .showcase:hover .shotCenter {

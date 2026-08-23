@@ -1,0 +1,70 @@
+.showcase {
+  position: relative;
+  width: 100%;
+  min-height: 320px;
+}
+
+.phoneShot {
+  position: absolute;
+  top: 28%;
+  left: 50%;
+  --phone-width: clamp(118px, 12.5vw, 164px);
+  --island-width: 36px;
+  --island-height: 10px;
+  --island-top: 5px;
+  transition: transform 0.3s ease;
+}
+
+.shot1 {
+  transform: translate(-260%, -12%) rotate(-18deg);
+  z-index: 0;
+}
+
+.shot2 {
+  transform: translate(-166%, -18%) rotate(-11deg);
+  z-index: 1;
+}
+
+.shot3 {
+  transform: translate(-76%, -26%) rotate(-4deg);
+  z-index: 3;
+}
+
+.shot4 {
+  transform: translate(10%, -26%) rotate(4deg);
+  z-index: 4;
+}
+
+.shot5 {
+  transform: translate(100%, -18%) rotate(11deg);
+  z-index: 1;
+}
+
+.shot6 {
+  transform: translate(192%, -12%) rotate(18deg);
+  z-index: 0;
+}
+
+.showcase:hover .shot1 {
+  transform: translate(-270%, -16%) rotate(-21deg);
+}
+
+.showcase:hover .shot2 {
+  transform: translate(-174%, -22%) rotate(-13deg);
+}
+
+.showcase:hover .shot3 {
+  transform: translate(-80%, -30%) rotate(-6deg);
+}
+
+.showcase:hover .shot4 {
+  transform: translate(14%, -30%) rotate(6deg);
+}
+
+.showcase:hover .shot5 {
+  transform: translate(106%, -22%) rotate(13deg);
+}
+
+.showcase:hover .shot6 {
+  transform: translate(200%, -16%) rotate(21deg);
+}

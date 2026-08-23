@@ -1,3 +1,4 @@
+import Image from "next/image";
 import StackSection from "@/components/StackSection";
 import PhoneFrame from "@/components/PhoneFrame";
 import styles from "./sections.module.css";
@@ -15,11 +16,20 @@ export default function NotificationsSection() {
           </h2>
           <p className={styles.body}>
             Automatic confirmations, reminders and rescheduling links
-            delivered through the booking bot — fewer no-shows, fewer phone
+            delivered straight to Telegram through the booking bot — plus SMS
+            for clients who don&apos;t use it. Fewer no-shows, fewer phone
             calls, no manual follow-up.
           </p>
         </div>
-        <PhoneFrame label="Booking bot notifications — preview coming soon" />
+        <PhoneFrame label="Booking bot notifications — preview coming soon">
+          <Image
+            src="/demo-shots/telegram-bot.png"
+            alt="Telegram booking bot conversation with appointment reminders"
+            fill
+            sizes="360px"
+            style={{ objectFit: "cover" }}
+          />
+        </PhoneFrame>
       </div>
     </StackSection>
   );
