@@ -20,12 +20,9 @@ type DemoStageProps = {
   /** If set, renders the embedded document at this fixed CSS-px size
    *  (e.g. a real phone viewport) uniformly scaled to fit the box, and
    *  lets it scroll internally like a real device instead of auto-fitting
-   *  its height. Use for embeds the visitor navigates around in — without
-   *  this, `minViewportHeight`'s scale-to-fit only ever grows (see
-   *  `syncNeed`), so visiting a taller in-app page permanently shrinks
-   *  every other page of the same embed. Mutually exclusive in effect
-   *  with `minViewportHeight`/auto-fit; content-height tracking is
-   *  skipped entirely when this is set. */
+   *  its height. Mutually exclusive in effect with `minViewportHeight`/
+   *  auto-fit; content-height tracking is skipped entirely when this is
+   *  set. */
   fixedViewport?: { width: number; height: number };
 };
 
@@ -68,14 +65,11 @@ export default function DemoStage({
       const doc = iframeRef.current?.contentDocument;
       if (!doc) return;
       const required = doc.documentElement.scrollHeight;
-      setNeedH((prev) => {
-        const boxH = box?.h ?? 0;
-        return required > Math.max(boxH, prev) ? required : prev;
-      });
+      setNeedH(required);
     } catch {
       // cross-origin or not yet accessible; leave needH as-is
     }
-  }, [box]);
+  }, []);
 
   useEffect(() => {
     if (!box) return;
@@ -155,9 +149,9 @@ export default function DemoStage({
         if (match) {
           clickedRef.current = true;
           match.click();
-          // needH is otherwise monotonic-increasing (see syncNeed); reset
-          // it here so a shorter post-click view isn't stuck at the taller
-          // pre-click height, then force a re-measure via contentNonce.
+          // Reset needH so the frame doesn't sit at the pre-click page's
+          // height for the one frame before contentNonce's re-measure
+          // lands, then force that re-measure.
           setNeedH(minViewportHeight);
           setContentNonce((n) => n + 1);
           // Safety top-up for layout that settles late in the new view.
