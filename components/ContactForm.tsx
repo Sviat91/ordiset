@@ -107,9 +107,6 @@ export default function ContactForm() {
   return (
     <form noValidate onSubmit={handleSubmit} className={styles.form}>
       <div className={styles.field}>
-        <label htmlFor="name" className={styles.label}>
-          <StableLabel pick={(t) => t.contactForm.nameLabel} />
-        </label>
         <input
           id="name"
           name="name"
@@ -118,6 +115,8 @@ export default function ContactForm() {
           value={values.name}
           onChange={handleChange}
           onBlur={handleBlur}
+          placeholder={dict.nameLabel}
+          aria-label={dict.nameLabel}
           aria-invalid={Boolean(fieldError("name"))}
           aria-describedby={fieldError("name") ? "name-error" : undefined}
           className={`${styles.input} ${fieldError("name") ? styles.inputError : ""}`}
@@ -130,9 +129,6 @@ export default function ContactForm() {
       </div>
 
       <div className={styles.field}>
-        <label htmlFor="email" className={styles.label}>
-          <StableLabel pick={(t) => t.contactForm.emailLabel} />
-        </label>
         <input
           id="email"
           name="email"
@@ -141,6 +137,8 @@ export default function ContactForm() {
           value={values.email}
           onChange={handleChange}
           onBlur={handleBlur}
+          placeholder={dict.emailLabel}
+          aria-label={dict.emailLabel}
           aria-invalid={Boolean(fieldError("email"))}
           aria-describedby={fieldError("email") ? "email-error" : undefined}
           className={`${styles.input} ${fieldError("email") ? styles.inputError : ""}`}
@@ -153,9 +151,6 @@ export default function ContactForm() {
       </div>
 
       <div className={styles.field}>
-        <label htmlFor="message" className={styles.label}>
-          <StableLabel pick={(t) => t.contactForm.messageLabel} />
-        </label>
         <textarea
           id="message"
           name="message"
@@ -164,6 +159,8 @@ export default function ContactForm() {
           value={values.message}
           onChange={handleChange}
           onBlur={handleBlur}
+          placeholder={dict.messageLabel}
+          aria-label={dict.messageLabel}
           aria-invalid={Boolean(fieldError("message"))}
           aria-describedby={fieldError("message") ? "message-error" : undefined}
           className={`${styles.input} ${fieldError("message") ? styles.inputError : ""}`}

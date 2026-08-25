@@ -10,11 +10,6 @@
   gap: 8px;
 }
 
-.label {
-  font-size: 0.8125rem;
-  color: var(--text-muted);
-}
-
 .input {
   background: var(--bg-elevated);
   border: 1px solid var(--border);
@@ -23,6 +18,10 @@
   color: var(--text);
   font: inherit;
   resize: vertical;
+}
+
+.input::placeholder {
+  color: var(--text-muted);
 }
 
 .input:focus {
@@ -43,7 +42,7 @@
 .submit {
   appearance: none;
   border: none;
-  align-self: flex-start;
+  align-self: center;
   padding: 13px 24px;
   font: inherit;
   font-size: 0.9375rem;
