@@ -14,19 +14,21 @@
   grid-area: 1 / 1;
 }
 
+/* Overlapping cross-dissolve, not a sequential blink — outgoing and
+   incoming both animate opacity over the same window, so text visibly
+   flows from one language into the other. Timing matches StableLabel's so
+   the whole site's locale-switch motion reads as one consistent language. */
 .current {
   visibility: visible;
   opacity: 1;
-  transition: opacity 110ms ease 90ms;
+  transition: opacity 350ms ease-in-out;
 }
 
 .ghost {
   visibility: hidden;
   opacity: 0;
   pointer-events: none;
-  /* opacity first, then flip visibility — matches StableLabel's timing so
-     the whole site's locale-switch motion reads as one consistent language. */
-  transition: opacity 90ms ease, visibility 0s linear 90ms;
+  transition: opacity 350ms ease-in-out, visibility 0s linear 350ms;
 }
 
 @media (prefers-reduced-motion: reduce) {

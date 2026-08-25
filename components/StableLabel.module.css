@@ -12,21 +12,24 @@
   white-space: nowrap;
 }
 
-/* Sequential cross-fade on locale switch (never runs on first paint —
-   there is no previous value to transition from). */
+/* Overlapping cross-dissolve on locale switch (never runs on first paint —
+   there is no previous value to transition from): outgoing and incoming
+   both animate opacity over the same window, so one visibly flows into the
+   other instead of a blink-out-then-blink-in. */
 .current {
   visibility: visible;
   opacity: 1;
-  transition: opacity 110ms ease 90ms;
+  transition: opacity 350ms ease-in-out;
 }
 
 .ghost {
   visibility: hidden;
   opacity: 0;
   pointer-events: none;
-  /* opacity first, then flip visibility — and pointer-events: none so the
-     fading-out label can never eat a click during those 90ms. */
-  transition: opacity 90ms ease, visibility 0s linear 90ms;
+  /* opacity fades in place; visibility only flips at the very end of that
+     fade (not before), and pointer-events: none so the fading-out label can
+     never eat a click while it's still visible. */
+  transition: opacity 350ms ease-in-out, visibility 0s linear 350ms;
 }
 
 @media (prefers-reduced-motion: reduce) {
