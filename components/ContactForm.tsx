@@ -108,7 +108,7 @@ export default function ContactForm() {
     <form noValidate onSubmit={handleSubmit} className={styles.form}>
       <div className={styles.field}>
         <label htmlFor="name" className={styles.label}>
-          {dict.nameLabel}
+          <StableLabel pick={(t) => t.contactForm.nameLabel} />
         </label>
         <input
           id="name"
@@ -131,7 +131,7 @@ export default function ContactForm() {
 
       <div className={styles.field}>
         <label htmlFor="email" className={styles.label}>
-          {dict.emailLabel}
+          <StableLabel pick={(t) => t.contactForm.emailLabel} />
         </label>
         <input
           id="email"
@@ -154,7 +154,7 @@ export default function ContactForm() {
 
       <div className={styles.field}>
         <label htmlFor="message" className={styles.label}>
-          {dict.messageLabel}
+          <StableLabel pick={(t) => t.contactForm.messageLabel} />
         </label>
         <textarea
           id="message"

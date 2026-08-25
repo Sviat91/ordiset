@@ -1,16 +1,37 @@
 .wrap {
-  position: relative;
+  display: grid;
   width: 100%;
+  /* Grid items default to `justify-items: stretch`, so each locale variant
+     fills the full column width — required so text wraps at the same width
+     it always has (see the flex-parent note this class was written against:
+     Hero/BookingSite/Notifications' `.stack { align-items: center }` would
+     otherwise shrink this box to its content, and `width: 100%` is what
+     forces it full-width instead — unrelated to the grid stacking itself,
+     do not remove). */
 }
 
-/* Out of flow, out of the a11y tree and out of find-in-page (visibility:
-   hidden), same width as the in-flow variant (left/right: 0) — so its
-   measured height is exactly what the visible block would be. */
+.wrap > * {
+  grid-area: 1 / 1;
+}
+
+.current {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 110ms ease 90ms;
+}
+
 .ghost {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
   visibility: hidden;
+  opacity: 0;
   pointer-events: none;
+  /* opacity first, then flip visibility — matches StableLabel's timing so
+     the whole site's locale-switch motion reads as one consistent language. */
+  transition: opacity 90ms ease, visibility 0s linear 90ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .current,
+  .ghost {
+    transition: none;
+  }
 }
