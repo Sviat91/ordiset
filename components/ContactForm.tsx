@@ -2,6 +2,9 @@
 
 import { useRef, useState } from "react";
 import type { ChangeEvent, FocusEvent, FormEvent } from "react";
+import type { Dictionary } from "@/lib/locales";
+import { useLocale } from "@/components/LocaleProvider";
+import StableLabel from "@/components/StableLabel";
 import styles from "./ContactForm.module.css";
 
 type FieldName = "name" | "email" | "message";
@@ -13,21 +16,23 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const initialValues: Values = { name: "", email: "", message: "" };
 
-function validate(values: Values): Errors {
+function validate(values: Values, dict: Dictionary["contactForm"]): Errors {
   const errors: Errors = {};
   if (values.name.trim().length < 2) {
-    errors.name = "Enter your name (at least 2 characters).";
+    errors.name = dict.errorName;
   }
   if (!EMAIL_RE.test(values.email)) {
-    errors.email = "Enter a valid email address.";
+    errors.email = dict.errorEmail;
   }
   if (values.message.trim().length < 10) {
-    errors.message = "Tell us a bit more (at least 10 characters).";
+    errors.message = dict.errorMessage;
   }
   return errors;
 }
 
 export default function ContactForm() {
+  const { dict: d } = useLocale();
+  const dict = d.contactForm;
   const [values, setValues] = useState<Values>(initialValues);
   const [errors, setErrors] = useState<Errors>({});
   const [touched, setTouched] = useState<Partial<Record<FieldName, boolean>>>(
@@ -60,7 +65,7 @@ export default function ContactForm() {
   function handleBlur(e: FocusEvent<HTMLInputElement | HTMLTextAreaElement>) {
     const { name } = e.target as { name: FieldName };
     setTouched((prev) => ({ ...prev, [name]: true }));
-    const fieldError = validate(values)[name];
+    const fieldError = validate(values, dict)[name];
     setErrors((prev) => {
       const next = { ...prev };
       if (fieldError) next[name] = fieldError;
@@ -71,7 +76,7 @@ export default function ContactForm() {
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const validationErrors = validate(values);
+    const validationErrors = validate(values, dict);
     setErrors(validationErrors);
     setTouched({ name: true, email: true, message: true });
 
@@ -103,7 +108,7 @@ export default function ContactForm() {
     <form noValidate onSubmit={handleSubmit} className={styles.form}>
       <div className={styles.field}>
         <label htmlFor="name" className={styles.label}>
-          Name
+          {dict.nameLabel}
         </label>
         <input
           id="name"
@@ -126,7 +131,7 @@ export default function ContactForm() {
 
       <div className={styles.field}>
         <label htmlFor="email" className={styles.label}>
-          Email
+          {dict.emailLabel}
         </label>
         <input
           id="email"
@@ -149,7 +154,7 @@ export default function ContactForm() {
 
       <div className={styles.field}>
         <label htmlFor="message" className={styles.label}>
-          Message
+          {dict.messageLabel}
         </label>
         <textarea
           id="message"
@@ -175,18 +180,22 @@ export default function ContactForm() {
         disabled={status === "submitting"}
         className={styles.submit}
       >
-        {status === "submitting" ? "Sending…" : "Send message"}
+        <StableLabel
+          pick={(t) =>
+            status === "submitting" ? t.contactForm.submitting : t.contactForm.submit
+          }
+        />
       </button>
 
       {status === "sent" && (
         <p role="status" className={styles.success}>
-          Thanks — we&apos;ll be in touch shortly.
+          {dict.success}
         </p>
       )}
 
       {status === "error" && (
         <p role="alert" className={styles.error}>
-          Something went wrong — please try again in a moment.
+          {dict.errorGeneric}
         </p>
       )}
     </form>

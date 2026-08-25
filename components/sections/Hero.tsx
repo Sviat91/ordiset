@@ -2,7 +2,10 @@
 
 import Image from "next/image";
 import StackSection from "@/components/StackSection";
+import StableTextBlock from "@/components/StableTextBlock";
 import { getSectionTop } from "@/lib/sections";
+import { useLocale } from "@/components/LocaleProvider";
+import StableLabel from "@/components/StableLabel";
 import styles from "./sections.module.css";
 import heroStyles from "./Hero.module.css";
 
@@ -20,6 +23,8 @@ function scrollToSection(id: string) {
 }
 
 export default function Hero() {
+  const { dict: d } = useLocale();
+  const dict = d.hero;
   return (
     <StackSection id="overview" z={1}>
       <div
@@ -27,30 +32,29 @@ export default function Hero() {
       >
         <span className={heroStyles.glow} aria-hidden />
         <div className={`${heroStyles.content} ${styles.stack}`}>
-          <p className={styles.eyebrow}>White-label booking infrastructure</p>
-          <h1 className={styles.title}>Your booking system. Your brand.</h1>
-          <p className={`${styles.body} ${heroStyles.lede}`}>
-            Ordiset gives salons, barbershops, studios, clinics and
-            independent pros their own branded booking site — scheduling,
-            reminders and client history included. Every color, photo and
-            detail is yours to customize from one admin panel, and changes go
-            live instantly. No marketplace, no shared traffic — just your
-            business, looking exactly like your business.
-          </p>
+          <StableTextBlock>
+            {(t) => (
+              <>
+                <p className={styles.eyebrow}>{t.hero.eyebrow}</p>
+                <h1 className={styles.title}>{t.hero.title}</h1>
+                <p className={`${styles.body} ${heroStyles.lede}`}>{t.hero.lede}</p>
+              </>
+            )}
+          </StableTextBlock>
           <div className={heroStyles.actions}>
             <a
               href="#contact"
               className={heroStyles.primary}
               onClick={scrollToSection("contact")}
             >
-              Get in touch
+              <StableLabel pick={(t) => t.hero.ctaPrimary} />
             </a>
             <a
               href="#preview"
               className={heroStyles.secondary}
               onClick={scrollToSection("preview")}
             >
-              See how it works
+              <StableLabel pick={(t) => t.hero.ctaSecondary} />
             </a>
           </div>
           <div className={styles.grow}>
@@ -58,7 +62,7 @@ export default function Hero() {
               <div className={`${heroStyles.shot} ${heroStyles.shotFarLeft}`}>
                 <Image
                   src="/demo-shots/aura-specialists.png"
-                  alt="Ordiset demo — Aura Massage & Relax, specialist selection"
+                  alt={dict.altAuraSpecialists}
                   fill
                   sizes="300px"
                   className={heroStyles.shotImg}
@@ -67,7 +71,7 @@ export default function Hero() {
               <div className={`${heroStyles.shot} ${heroStyles.shotLeft}`}>
                 <Image
                   src="/demo-shots/about.png"
-                  alt="Ordiset demo — About page, light theme"
+                  alt={dict.altAbout}
                   fill
                   sizes="300px"
                   className={heroStyles.shotImg}
@@ -76,7 +80,7 @@ export default function Hero() {
               <div className={`${heroStyles.shot} ${heroStyles.shotCenter}`}>
                 <Image
                   src="/demo-shots/home.png"
-                  alt="Ordiset demo — specialist selection"
+                  alt={dict.altHome}
                   fill
                   sizes="320px"
                   className={heroStyles.shotImg}
@@ -86,7 +90,7 @@ export default function Hero() {
               <div className={`${heroStyles.shot} ${heroStyles.shotRight}`}>
                 <Image
                   src="/demo-shots/booking.png"
-                  alt="Ordiset demo — booking calendar"
+                  alt={dict.altBooking}
                   fill
                   sizes="300px"
                   className={heroStyles.shotImg}
@@ -95,7 +99,7 @@ export default function Hero() {
               <div className={`${heroStyles.shot} ${heroStyles.shotFarRight}`}>
                 <Image
                   src="/demo-shots/blush-specialists.png"
-                  alt="Ordiset demo — Blush Nail Studio, specialist selection"
+                  alt={dict.altBlushSpecialists}
                   fill
                   sizes="300px"
                   className={heroStyles.shotImg}

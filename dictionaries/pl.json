@@ -1,0 +1,89 @@
+{
+  "metadata": {
+    "title": "Ordiset — uniwersalny system rezerwacji",
+    "description": "Ordiset zapewnia salonom, barbershopom, studiom, klinikom i niezależnym specjalistom własną, brandowaną stronę rezerwacyjną — z harmonogramem, przypomnieniami i historią klientów w standardzie."
+  },
+  "nav": {
+    "overview": "Przegląd",
+    "preview": "Podgląd",
+    "admin": "Panel",
+    "mobile": "Mobilna",
+    "bookingSite": "Twoja strona",
+    "notifications": "Powiadomienia",
+    "contact": "Kontakt",
+    "logoAlt": "Ordiset",
+    "languageLabel": "Zmień język"
+  },
+  "hero": {
+    "eyebrow": "Infrastruktura rezerwacyjna pod Twoją marką",
+    "title": "Twój system rezerwacji. Twoja marka.",
+    "lede": "Ordiset zapewnia salonom, barbershopom, studiom, klinikom i niezależnym specjalistom własną, brandowaną stronę rezerwacyjną — z harmonogramem, przypomnieniami i historią klientów w standardzie. Każdy kolor, zdjęcie i szczegół możesz dostosować z jednego panelu administracyjnego, a zmiany pojawiają się natychmiast. Bez marketplace'u, bez wspólnego ruchu — tylko Twoja firma, wyglądająca dokładnie jak Twoja firma.",
+    "ctaPrimary": "Skontaktuj się",
+    "ctaSecondary": "Zobacz, jak to działa",
+    "altAuraSpecialists": "Demo Ordiset — Aura Massage & Relax, wybór specjalisty",
+    "altAbout": "Demo Ordiset — strona „O nas”, jasny motyw",
+    "altHome": "Demo Ordiset — wybór specjalisty",
+    "altBooking": "Demo Ordiset — kalendarz rezerwacji",
+    "altBlushSpecialists": "Demo Ordiset — Blush Nail Studio, wybór specjalisty"
+  },
+  "preview": {
+    "demoTitle": "Demo Ordiset na żywo",
+    "demoTitleMobile": "Demo Ordiset na żywo (podgląd, wersja mobilna)",
+    "phoneLabel": "Podgląd demo na żywo — wkrótce"
+  },
+  "admin": {
+    "demoTitle": "Demo panelu administracyjnego Ordiset",
+    "demoTitleMobile": "Demo panelu administracyjnego Ordiset (wersja mobilna)",
+    "phoneLabel": "Podgląd panelu administracyjnego — wkrótce"
+  },
+  "mobile": {
+    "eyebrow": "Wersja mobilna",
+    "title": "Rezerwacje, które na telefonie czują się naturalnie",
+    "body": "Większość Twoich klientów rezerwuje z telefonu pod koniec dnia. Proces rezerwacji w Ordiset jest zaprojektowany przede wszystkim z myślą o urządzeniach mobilnych — wybierz usługę, wybierz termin, potwierdź. Bez instalowania aplikacji, bez zakładania konta.",
+    "phoneLabel": "Mobilny proces rezerwacji — podgląd wkrótce",
+    "demoTitle": "Demo Ordiset na żywo (wersja mobilna)"
+  },
+  "bookingSite": {
+    "eyebrow": "Twoja strona rezerwacyjna",
+    "title": "Strona, którą rozpoznają Twoi klienci",
+    "body": "Każda firma otrzymuje dedykowaną stronę rezerwacyjną na własnej domenie lub subdomenie — z Twoją nazwą, Twoją paletą kolorów, Twoimi usługami. Ordiset pozostaje niewidoczny w tle. Do każdej strony dołączony jest też bot rezerwacyjny na Telegramie — wystarczy go podłączyć i zacząć przyjmować rezerwacje prosto z czatu.",
+    "auraSpecialistsLabel": "Aura Massage & Relax — wybór specjalisty",
+    "auraSpecialistsAlt": "Mobilna strona rezerwacyjna Aura Massage & Relax — wybór specjalisty",
+    "blushSpecialistsLabel": "Blush Nail Studio — wybór specjalisty",
+    "blushSpecialistsAlt": "Mobilna strona rezerwacyjna Blush Nail Studio — wybór specjalisty",
+    "loomSpecialistsLabel": "Loom & Blade — wybór specjalisty",
+    "loomSpecialistsAlt": "Mobilna strona rezerwacyjna Loom & Blade — wybór specjalisty",
+    "loomBookingLabel": "Loom & Blade — umów wizytę",
+    "loomBookingAlt": "Mobilna strona rezerwacyjna Loom & Blade — umów wizytę",
+    "auraBookingLabel": "Aura Massage & Relax — umów wizytę",
+    "auraBookingAlt": "Mobilna strona rezerwacyjna Aura Massage & Relax — umów wizytę",
+    "telegramLabel": "Rozmowa z botem rezerwacyjnym na Telegramie",
+    "telegramAlt": "Rozmowa z botem rezerwacyjnym na Telegramie z przypomnieniami o wizycie"
+  },
+  "notifications": {
+    "eyebrow": "Powiadomienia",
+    "title": "Każde powiadomienie w pełni konfigurowalne",
+    "body": "Włącz przypomnienia e-mail, SMS lub na Telegramie z jednego panelu ustawień — klienci, którzy rezerwują przez Twojego bota, są tam powiadamiani automatycznie. Konfiguracja SMS zajmuje zaledwie kilka minut, z jasną instrukcją krok po kroku.",
+    "altSms": "Panel administracyjny Ordiset — konfiguracja dostawcy SMS",
+    "altNotifications": "Panel administracyjny Ordiset — ustawienia powiadomień e-mail i Telegram",
+    "altTemplates": "Panel administracyjny Ordiset — szablony wiadomości przypominających"
+  },
+  "contact": {
+    "eyebrow": "Kontakt",
+    "title": "Skonfigurujmy Twój system rezerwacji",
+    "body": "Opowiedz nam o swojej firmie, a odezwiemy się z prezentacją.",
+    "footer": "© 2026 Ordiset"
+  },
+  "contactForm": {
+    "nameLabel": "Imię",
+    "emailLabel": "E-mail",
+    "messageLabel": "Wiadomość",
+    "submit": "Wyślij wiadomość",
+    "submitting": "Wysyłanie…",
+    "success": "Dziękujemy — wkrótce się odezwiemy.",
+    "errorGeneric": "Coś poszło nie tak — spróbuj ponownie za chwilę.",
+    "errorName": "Podaj swoje imię (co najmniej 2 znaki).",
+    "errorEmail": "Podaj prawidłowy adres e-mail.",
+    "errorMessage": "Napisz nieco więcej (co najmniej 10 znaków)."
+  }
+}

@@ -1,0 +1,16 @@
+.wrap {
+  position: relative;
+  width: 100%;
+}
+
+/* Out of flow, out of the a11y tree and out of find-in-page (visibility:
+   hidden), same width as the in-flow variant (left/right: 0) — so its
+   measured height is exactly what the visible block would be. */
+.ghost {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  visibility: hidden;
+  pointer-events: none;
+}

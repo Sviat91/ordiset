@@ -18,7 +18,7 @@
   padding-inline: 14px 10px;
   display: flex;
   align-items: center;
-  gap: 28px;
+  gap: 18px;
 }
 
 .brand {
@@ -60,12 +60,13 @@
   position: relative;
   display: flex;
   align-items: center;
-  gap: 28px;
+  gap: 16px;
 }
 
 .link {
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   color: var(--text-muted);
+  white-space: nowrap;
   transition: color 0.15s ease;
 }
 
@@ -83,8 +84,8 @@
 }
 
 .cta {
-  font-size: 0.875rem;
-  padding: 9px 18px;
+  font-size: 0.8125rem;
+  padding: 8px 14px;
   background: var(--accent);
   color: var(--on-accent);
   border-radius: var(--radius-pill);
@@ -95,8 +96,24 @@
   background: var(--accent-hover);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1023px) {
   .links {
     display: none;
+  }
+}
+
+/* Above the breakpoint the pill hugs its content instead of stretching to
+   --maxw. The content is locale-invariant (StableLabel), so this is
+   literally "as wide as the longest language, and no wider". Below the
+   breakpoint the links are hidden, so the full-width pill is kept as-is. */
+@media (min-width: 1024px) {
+  .nav {
+    width: fit-content;
+  }
+
+  /* `margin-right: auto` resolves to 0 in a shrink-to-fit flex container;
+     22px + the 18px row gap = 40px of separation from the link strip. */
+  .brand {
+    margin-right: 22px;
   }
 }

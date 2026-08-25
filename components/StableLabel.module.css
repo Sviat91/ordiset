@@ -1,0 +1,37 @@
+/* All locale variants share one grid cell, so the box is always as wide as
+   the longest of them and the visible one is centred in it. The inactive
+   ones keep `visibility: hidden`: out of paint, hit-testing, the a11y tree
+   and find-in-page, but still contributing their width to the track. */
+.stack {
+  display: grid;
+  justify-items: center;
+}
+
+.stack > * {
+  grid-area: 1 / 1;
+  white-space: nowrap;
+}
+
+/* Sequential cross-fade on locale switch (never runs on first paint —
+   there is no previous value to transition from). */
+.current {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 110ms ease 90ms;
+}
+
+.ghost {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  /* opacity first, then flip visibility — and pointer-events: none so the
+     fading-out label can never eat a click during those 90ms. */
+  transition: opacity 90ms ease, visibility 0s linear 90ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .current,
+  .ghost {
+    transition: none;
+  }
+}

@@ -1,23 +1,24 @@
+"use client";
+
 import ContactForm from "@/components/ContactForm";
+import { useLocale } from "@/components/LocaleProvider";
 import styles from "./sections.module.css";
 import contactStyles from "./ContactSection.module.css";
 
 export default function ContactSection() {
+  const { dict } = useLocale();
   return (
     <section id="contact" className={contactStyles.section}>
       <div className={styles.container}>
         <div className={styles.stack}>
-          <p className={styles.eyebrow}>Contact</p>
-          <h2 className={styles.title}>Let&apos;s set up your booking system</h2>
-          <p className={styles.body}>
-            Tell us about your business and we&apos;ll get back to you with a
-            walkthrough.
-          </p>
+          <p className={styles.eyebrow}>{dict.contact.eyebrow}</p>
+          <h2 className={styles.title}>{dict.contact.title}</h2>
+          <p className={styles.body}>{dict.contact.body}</p>
           <div className={contactStyles.formWrap}>
             <ContactForm />
           </div>
         </div>
-        <footer className={contactStyles.footer}>© 2026 Ordiset</footer>
+        <footer className={contactStyles.footer}>{dict.contact.footer}</footer>
       </div>
     </section>
   );

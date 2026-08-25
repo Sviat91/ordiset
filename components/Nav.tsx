@@ -4,15 +4,19 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { motion, useReducedMotion, useScroll, useMotionValueEvent } from "framer-motion";
 import { getSectionTops, getSectionTop } from "@/lib/sections";
+import type { Dictionary } from "@/lib/locales";
+import { useLocale } from "@/components/LocaleProvider";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
+import StableLabel from "@/components/StableLabel";
 import styles from "./Nav.module.css";
 
-const LINKS = [
-  { href: "#overview", label: "Overview" },
-  { href: "#preview", label: "Preview" },
-  { href: "#admin", label: "Admin panel" },
-  { href: "#mobile", label: "Mobile" },
-  { href: "#booking-site", label: "Booking site" },
-  { href: "#notifications", label: "Notifications" },
+const LINKS: { href: string; key: keyof Dictionary["nav"] }[] = [
+  { href: "#overview", key: "overview" },
+  { href: "#preview", key: "preview" },
+  { href: "#admin", key: "admin" },
+  { href: "#mobile", key: "mobile" },
+  { href: "#booking-site", key: "bookingSite" },
+  { href: "#notifications", key: "notifications" },
 ];
 
 function computeActiveId(): string | null {
@@ -28,6 +32,8 @@ function computeActiveId(): string | null {
 // No hamburger/drawer in this pass — below 768px the link list is hidden
 // and only the logo + CTA remain visible.
 export default function Nav() {
+  const { locale, dict: d } = useLocale();
+  const dict = d.nav;
   const [activeId, setActiveId] = useState<string | null>(null);
   const [indicator, setIndicator] = useState<{ left: number; width: number } | null>(null);
   const linksRef = useRef<HTMLElement>(null);
@@ -86,7 +92,9 @@ export default function Nav() {
     updateIndicator();
     window.addEventListener("resize", updateIndicator);
     return () => window.removeEventListener("resize", updateIndicator);
-  }, [activeId]);
+    // `locale` is not read in the effect body, but label widths change with
+    // the locale, so the measurement must be redone on switch too.
+  }, [activeId, locale]);
 
   const scrollToId = (id: string) => (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
@@ -106,7 +114,7 @@ export default function Nav() {
           <span className={styles.mark}>
             <Image
               src="/ordiset-logo.png"
-              alt="Ordiset"
+              alt={dict.logoAlt}
               width={2400}
               height={1309}
               sizes="120px"
@@ -131,7 +139,7 @@ export default function Nav() {
                 }}
                 onClick={scrollToId(id)}
               >
-                {link.label}
+                <StableLabel pick={(t) => t.nav[link.key]} />
               </a>
             );
           })}
@@ -144,8 +152,10 @@ export default function Nav() {
           )}
         </nav>
 
+        <LanguageSwitcher />
+
         <a href="#contact" className={styles.cta} onClick={scrollToId("contact")}>
-          Contact
+          <StableLabel pick={(t) => t.nav.contact} />
         </a>
       </div>
     </header>

@@ -1,10 +1,15 @@
+"use client";
+
 import StackSection from "@/components/StackSection";
 import WindowChrome from "@/components/WindowChrome";
 import PhoneFrame from "@/components/PhoneFrame";
 import DemoStage from "@/components/DemoStage";
+import { useLocale } from "@/components/LocaleProvider";
 import styles from "./sections.module.css";
 
 export default function AdminPanelSection() {
+  const { dict: d } = useLocale();
+  const dict = d.admin;
   return (
     <StackSection id="admin" z={3}>
       <div className={`${styles.containerWide} ${styles.fill}`}>
@@ -12,16 +17,22 @@ export default function AdminPanelSection() {
           <WindowChrome chrome={false}>
             <DemoStage
               src="/demo-app/index.html"
-              title="Ordiset admin panel demo"
+              title={dict.demoTitle}
+              // Not display text — a DOM text matcher against the embedded
+              // (out-of-scope) demo-widget iframe. Translating it breaks the
+              // admin demo auto-click. Keep hardcoded English. See D8.
               autoClickText="View admin demo"
             />
           </WindowChrome>
         </div>
         <div className={styles.mobileOnly}>
-          <PhoneFrame label="Admin panel preview — coming soon">
+          <PhoneFrame label={dict.phoneLabel}>
             <DemoStage
               src="/demo-app/index.html"
-              title="Ordiset admin panel demo (mobile)"
+              title={dict.demoTitleMobile}
+              // Not display text — a DOM text matcher against the embedded
+              // (out-of-scope) demo-widget iframe. Translating it breaks the
+              // admin demo auto-click. Keep hardcoded English. See D8.
               autoClickText="View admin demo"
               fixedViewport={{ width: 390, height: 844 }}
             />

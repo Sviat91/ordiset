@@ -1,0 +1,89 @@
+{
+  "metadata": {
+    "title": "Ordiset — Universal Booking System",
+    "description": "Ordiset gives salons, barbershops, studios, clinics and independent pros their own branded booking site — scheduling, reminders and client history included."
+  },
+  "nav": {
+    "overview": "Overview",
+    "preview": "Preview",
+    "admin": "Admin panel",
+    "mobile": "Mobile",
+    "bookingSite": "Booking site",
+    "notifications": "Notifications",
+    "contact": "Contact",
+    "logoAlt": "Ordiset",
+    "languageLabel": "Change language"
+  },
+  "hero": {
+    "eyebrow": "White-label booking infrastructure",
+    "title": "Your booking system. Your brand.",
+    "lede": "Ordiset gives salons, barbershops, studios, clinics and independent pros their own branded booking site — scheduling, reminders and client history included. Every color, photo and detail is yours to customize from one admin panel, and changes go live instantly. No marketplace, no shared traffic — just your business, looking exactly like your business.",
+    "ctaPrimary": "Get in touch",
+    "ctaSecondary": "See how it works",
+    "altAuraSpecialists": "Ordiset demo — Aura Massage & Relax, specialist selection",
+    "altAbout": "Ordiset demo — About page, light theme",
+    "altHome": "Ordiset demo — specialist selection",
+    "altBooking": "Ordiset demo — booking calendar",
+    "altBlushSpecialists": "Ordiset demo — Blush Nail Studio, specialist selection"
+  },
+  "preview": {
+    "demoTitle": "Ordiset live demo",
+    "demoTitleMobile": "Ordiset live demo (preview, mobile)",
+    "phoneLabel": "Live demo preview — coming soon"
+  },
+  "admin": {
+    "demoTitle": "Ordiset admin panel demo",
+    "demoTitleMobile": "Ordiset admin panel demo (mobile)",
+    "phoneLabel": "Admin panel preview — coming soon"
+  },
+  "mobile": {
+    "eyebrow": "Mobile",
+    "title": "Booking that feels native on a phone",
+    "body": "Most of your clients book from a phone at the end of the day. The Ordiset booking flow is mobile-first — pick a service, pick a time, confirm. No app to install, no account to create.",
+    "phoneLabel": "Mobile booking flow — preview coming soon",
+    "demoTitle": "Ordiset live demo (mobile)"
+  },
+  "bookingSite": {
+    "eyebrow": "Your booking site",
+    "title": "A site your clients recognize",
+    "body": "Every business gets a dedicated booking site on its own domain or subdomain — your name, your palette, your services. Ordiset stays invisible behind it. A Telegram booking bot ships with every site too — just connect it and start taking bookings straight from chat.",
+    "auraSpecialistsLabel": "Aura Massage & Relax — specialist selection",
+    "auraSpecialistsAlt": "Aura Massage & Relax mobile booking site — specialist selection",
+    "blushSpecialistsLabel": "Blush Nail Studio — specialist selection",
+    "blushSpecialistsAlt": "Blush Nail Studio mobile booking site — specialist selection",
+    "loomSpecialistsLabel": "Loom & Blade — specialist selection",
+    "loomSpecialistsAlt": "Loom & Blade mobile booking site — specialist selection",
+    "loomBookingLabel": "Loom & Blade — book a visit",
+    "loomBookingAlt": "Loom & Blade mobile booking site — book a visit",
+    "auraBookingLabel": "Aura Massage & Relax — book a visit",
+    "auraBookingAlt": "Aura Massage & Relax mobile booking site — book a visit",
+    "telegramLabel": "Booking bot conversation on Telegram",
+    "telegramAlt": "Telegram booking bot conversation with appointment reminders"
+  },
+  "notifications": {
+    "eyebrow": "Notifications",
+    "title": "Every notification, fully configurable",
+    "body": "Turn on email, SMS or Telegram reminders from one settings panel — clients who book through your bot are notified there automatically. SMS setup takes just a few minutes, with clear step-by-step instructions included.",
+    "altSms": "Ordiset admin — SMS provider configuration",
+    "altNotifications": "Ordiset admin — email and Telegram notification settings",
+    "altTemplates": "Ordiset admin — reminder message templates"
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "title": "Let's set up your booking system",
+    "body": "Tell us about your business and we'll get back to you with a walkthrough.",
+    "footer": "© 2026 Ordiset"
+  },
+  "contactForm": {
+    "nameLabel": "Name",
+    "emailLabel": "Email",
+    "messageLabel": "Message",
+    "submit": "Send message",
+    "submitting": "Sending…",
+    "success": "Thanks — we'll be in touch shortly.",
+    "errorGeneric": "Something went wrong — please try again in a moment.",
+    "errorName": "Enter your name (at least 2 characters).",
+    "errorEmail": "Enter a valid email address.",
+    "errorMessage": "Tell us a bit more (at least 10 characters)."
+  }
+}
