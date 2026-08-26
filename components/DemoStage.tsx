@@ -1,15 +1,17 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./DemoStage.module.css";
 
 type DemoStageProps = {
   src: string;
   title: string;
-  /** Minimum CSS-px viewport height guaranteed to the embedded document.
-   *  If the frame box is shorter, the whole document is uniformly scaled
-   *  down so this many CSS px still fit. Raised automatically at runtime
-   *  if the embedded page turns out to need more. */
+  /** The CSS-px viewport height given to the embedded document. If the
+   *  frame box is taller, this is ignored and the box height is used at
+   *  scale 1; if the box is shorter, the whole document is uniformly
+   *  scaled down so this many CSS px still fit. Never derived from the
+   *  embedded document's own content height — see D1 in
+   *  handoff/demostage_shrink_plan.md. */
   minViewportHeight?: number; // default 800
   /** If set, a bounded poll looks for the first button/link whose text
    *  includes this string once the iframe has loaded, and clicks it. */
@@ -21,8 +23,7 @@ type DemoStageProps = {
    *  (e.g. a real phone viewport) uniformly scaled to fit the box, and
    *  lets it scroll internally like a real device instead of auto-fitting
    *  its height. Mutually exclusive in effect with `minViewportHeight`/
-   *  auto-fit; content-height tracking is skipped entirely when this is
-   *  set. */
+   *  auto-fit. */
   fixedViewport?: { width: number; height: number };
 };
 
@@ -38,11 +39,8 @@ export default function DemoStage({
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const boxRef = useRef<{ w: number; h: number } | null>(null);
   const [box, setBox] = useState<{ w: number; h: number } | null>(null);
-  const [needH, setNeedH] = useState(minViewportHeight);
   const [loadNonce, setLoadNonce] = useState(0);
-  const [contentNonce, setContentNonce] = useState(0);
   const clickedRef = useRef(false);
-  const contentRoRef = useRef<ResizeObserver | null>(null);
 
   useEffect(() => {
     const el = ref.current;
@@ -54,67 +52,15 @@ export default function DemoStage({
       const next = { w: width, h: height };
       boxRef.current = next;
       setBox(next);
-      setNeedH(minViewportHeight);
     });
     ro.observe(el);
     return () => ro.disconnect();
-  }, [minViewportHeight]);
-
-  const syncNeed = useCallback(() => {
-    try {
-      const doc = iframeRef.current?.contentDocument;
-      if (!doc) return;
-      const required = doc.documentElement.scrollHeight;
-      setNeedH(required);
-    } catch {
-      // cross-origin or not yet accessible; leave needH as-is
-    }
   }, []);
-
-  useEffect(() => {
-    if (!box) return;
-    const raf = requestAnimationFrame(syncNeed);
-    return () => cancelAnimationFrame(raf);
-  }, [box, contentNonce, syncNeed]);
 
   const handleLoad = () => {
     clickedRef.current = false;
     setLoadNonce((n) => n + 1);
-    // Fixed-viewport embeds (e.g. the phone-frame mobile preview) never
-    // auto-fit height — content taller than the fixed viewport scrolls
-    // internally instead, like a real device. Content-height tracking
-    // would be both unused and wasted work here.
-    if (fixedViewport) return;
-    syncNeed();
-    // Watch the embedded document's own content height continuously, so
-    // any post-load change (in-app navigation, sidebar collapse/expand,
-    // etc.) keeps `needH` (and thus the letterboxing frame) correctly
-    // sized instead of only ever measuring once at load.
-    contentRoRef.current?.disconnect();
-    try {
-      const doc = iframeRef.current?.contentDocument;
-      if (doc?.documentElement) {
-        const ro = new ResizeObserver(() => {
-          syncNeed();
-        });
-        ro.observe(doc.documentElement);
-        contentRoRef.current = ro;
-      }
-    } catch {
-      // cross-origin or not yet accessible; ignore
-    }
-    try {
-      iframeRef.current?.contentDocument?.fonts.ready.then(syncNeed);
-    } catch {
-      // cross-origin or unsupported; ignore
-    }
   };
-
-  useEffect(() => {
-    return () => {
-      contentRoRef.current?.disconnect();
-    };
-  }, []);
 
   // Auto-click: the embedded demo's admin-nav button has no stable id/data
   // attribute (text match is the only hook), and its target view isn't
@@ -130,7 +76,6 @@ export default function DemoStage({
     if (!autoClickText) return;
     let observer: MutationObserver | undefined;
     let overallTimer: number | undefined;
-    let topUpTimer: number | undefined;
 
     const tryClick = () => {
       if (clickedRef.current) return true;
@@ -149,15 +94,6 @@ export default function DemoStage({
         if (match) {
           clickedRef.current = true;
           match.click();
-          // Reset needH so the frame doesn't sit at the pre-click page's
-          // height for the one frame before contentNonce's re-measure
-          // lands, then force that re-measure.
-          setNeedH(minViewportHeight);
-          setContentNonce((n) => n + 1);
-          // Safety top-up for layout that settles late in the new view.
-          topUpTimer = window.setTimeout(() => {
-            setContentNonce((n) => n + 1);
-          }, 400);
           return true;
         }
       } catch {
@@ -186,9 +122,8 @@ export default function DemoStage({
     return () => {
       observer?.disconnect();
       if (overallTimer !== undefined) window.clearTimeout(overallTimer);
-      if (topUpTimer !== undefined) window.clearTimeout(topUpTimer);
     };
-  }, [autoClickText, loadNonce, minViewportHeight]);
+  }, [autoClickText, loadNonce]);
 
   // Cross-iframe brand sync: a same-origin child-iframe write to
   // localStorage was verified live (V6) not to fire a `storage` event on
@@ -224,13 +159,16 @@ export default function DemoStage({
       opacity: 1,
     };
   } else if (hasBox) {
-    const cssH = Math.max(box.h, needH);
-    const s = box.h / cssH;
-    const width = Math.ceil(box.w / s);
-    const height = Math.ceil(cssH);
+    // The embedded viewport is derived from the outer box only, never
+    // resized from the embedded document's own content height:
+    // `documentElement.scrollHeight` is `max(content, viewport)`, so on a
+    // `min-h-screen` embed feeding it back as the viewport height would
+    // ratchet the frame upward forever (D1, handoff/demostage_shrink_plan.md).
+    const viewportH = Math.max(box.h, minViewportHeight);
+    const s = box.h / viewportH;
     style = {
-      width,
-      height,
+      width: Math.ceil(box.w / s),
+      height: Math.ceil(viewportH),
       transform: `scale(${s})`,
       opacity: 1,
     };
