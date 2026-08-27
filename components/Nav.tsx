@@ -42,6 +42,9 @@ export default function Nav() {
   const suppressObserverRef = useRef(false);
   const scrollTimeoutRef = useRef<number | null>(null);
   const { scrollY } = useScroll();
+  // Mirrors `@media (max-width: 1023px) { .links { display: none } }` in
+  // Nav.module.css — update both together.
+  const linksVisibleRef = useRef<MediaQueryList | null>(null);
 
   useEffect(() => {
     const setInitialActiveId = () => {
@@ -51,7 +54,20 @@ export default function Nav() {
     setInitialActiveId();
   }, []);
 
+  useEffect(() => {
+    linksVisibleRef.current = window.matchMedia("(min-width: 1024px)");
+  }, []);
+
   useMotionValueEvent(scrollY, "change", () => {
+    // Below 1024px .links is display:none and the indicator has nothing to
+    // attach to, so this whole path is invisible — but computeActiveId ->
+    // getSectionTops() reads offsetHeight on all seven sections *every
+    // scroll frame*, while framer-motion writes an inline transform to
+    // those same sections every frame. That read/write interleave is a
+    // forced-layout thrash loop and is a prime suspect for the "heavy,
+    // rubbery" mobile scroll. matchMedia().matches is live and costs no
+    // layout (unlike offsetParent). M7/D9.
+    if (linksVisibleRef.current && !linksVisibleRef.current.matches) return;
     if (suppressObserverRef.current) return;
     const id = computeActiveId();
     if (id) setActiveId(id);

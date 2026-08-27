@@ -4,6 +4,7 @@ import StackSection from "@/components/StackSection";
 import WindowChrome from "@/components/WindowChrome";
 import PhoneFrame from "@/components/PhoneFrame";
 import DemoStage from "@/components/DemoStage";
+import StableTextBlock from "@/components/StableTextBlock";
 import { useLocale } from "@/components/LocaleProvider";
 import styles from "./sections.module.css";
 
@@ -26,6 +27,16 @@ export default function AdminPanelSection() {
           </WindowChrome>
         </div>
         <div className={styles.mobileOnly}>
+          <div className={styles.narrowOnly}>
+            <StableTextBlock>
+              {(t) => (
+                <>
+                  <p className={styles.eyebrow}>{t.admin.eyebrow}</p>
+                  <h2 className={styles.title}>{t.admin.title}</h2>
+                </>
+              )}
+            </StableTextBlock>
+          </div>
           <PhoneFrame label={dict.phoneLabel}>
             <DemoStage
               src="/demo-app/index.html"

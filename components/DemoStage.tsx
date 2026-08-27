@@ -152,10 +152,17 @@ export default function DemoStage({
     // `max` overscans by a sliver instead, clipped by the frame's own
     // `overflow: hidden` — invisible in practice, unlike a gap.
     const s = Math.max(box.w / fixedViewport.width, box.h / fixedViewport.height);
+    // `max` overscans exactly one axis; the other fits exactly, so one of
+    // these two offsets is always 0 and this can never open the gap the
+    // comment above rules out. Anchoring at the top-left instead dumps the
+    // whole overscan on the right/bottom edge, which reads as the embedded
+    // page being *shifted* rather than cropped. D2.
+    const dx = (box.w - fixedViewport.width * s) / 2;
+    const dy = (box.h - fixedViewport.height * s) / 2;
     style = {
       width: fixedViewport.width,
       height: fixedViewport.height,
-      transform: `scale(${s})`,
+      transform: `translate(${dx}px, ${dy}px) scale(${s})`,
       opacity: 1,
     };
   } else if (hasBox) {

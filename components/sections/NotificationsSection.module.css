@@ -38,14 +38,40 @@
   z-index: 2;
 }
 
-.showcase:hover .shotLeft {
-  transform: translate(-110%, -34%) rotate(-11deg);
+/* .grow now stretches this block (D4), so the fan is anchored at
+   top:50% with symmetric translateY and centres itself at any block
+   height instead of drifting with a fixed 38% anchor. Cards go
+   195px -> 211px at 390px (+8%) to stop the fan reading as lost in the
+   taller block; the step d stays 22%. min-height is now only a floor
+   for the case where a long locale leaves .grow nothing to grow into.
+   M7/D5. */
+@media (max-width: 700px) {
+  .showcase { min-height: 180px; }
+
+  .shot {
+    top: 50%;
+    width: clamp(180px, 54vw, 260px);
+  }
+
+  .shotLeft   { transform: translate(-72%, -46%) rotate(-6deg); }
+  .shotCenter { transform: translate(-50%, -54%) rotate(0deg); }
+  .shotRight  { transform: translate(-28%, -46%) rotate(6deg); }
 }
 
-.showcase:hover .shotRight {
-  transform: translate(10%, -34%) rotate(11deg);
-}
+/* Also min-width, not just hover: these desktop-spread rules are 0-3-0
+   and outrank the 0-1-0 mobile block above, so a mouse in a <=700px
+   window would throw the three surviving cards out to the six-shot
+   offsets. D8. */
+@media (hover: hover) and (min-width: 701px) {
+  .showcase:hover .shotLeft {
+    transform: translate(-110%, -34%) rotate(-11deg);
+  }
 
-.showcase:hover .shotCenter {
-  transform: translate(-50%, -44%) scale(1.03);
+  .showcase:hover .shotRight {
+    transform: translate(10%, -34%) rotate(11deg);
+  }
+
+  .showcase:hover .shotCenter {
+    transform: translate(-50%, -44%) scale(1.03);
+  }
 }

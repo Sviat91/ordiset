@@ -107,16 +107,105 @@
   height: 100%;
 }
 
+/* Width-only sibling of .mobileOnly: the admin heading is a mobile-IA
+   fix and a short *wide* window (>=900px, <=700px tall) renders the h2
+   at 48px, which would push the phone frame past the card and get it
+   clipped. D4. */
+.narrowOnly { display: none; }
+
+@media (max-width: 899px) {
+  .narrowOnly { display: block; }
+}
+
 /* Mirrors STATIC_STACK_QUERY in components/ScrollDock.tsx — keep in sync */
 @media (max-width: 899px), (max-height: 700px) {
   .desktopOnly {
     display: none;
+  }
+
+  /* D2: centres section content vertically. No-op for the .split grid call
+     site — justify-content only affects the grid's inline axis, where the
+     single 1fr track already consumes all space; vertical centring there is
+     already handled by .centerY { align-content: center }. */
+  .fill {
+    justify-content: center;
+  }
+
+  /* .mobileOnly (AdminPanelSection only) stacks its new heading above
+     the phone. align-items: stretch is inert for .phone — it has an
+     explicit width and centres itself via margin-inline: auto. With
+     only the phone inside (short wide window), column + gap is
+     visually identical to today's centred row. */
+  .mobileOnly {
+    flex-direction: column;
+    align-items: stretch;
+    gap: clamp(16px, 3svh, 28px);
   }
 }
 
 @media (min-width: 900px) and (min-height: 701px) {
   .mobileOnly {
     display: none;
+  }
+}
+
+/* Phone type scale (D1/M2). 560px, not 899px: at tablet widths the
+   vertical budget is generous and shrunken type would just look
+   broken (iPad portrait fits every section at desktop type). */
+@media (max-width: 560px) {
+  .eyebrow { margin-bottom: 8px; }
+
+  .title {
+    font-size: 1.5rem;
+    line-height: 1.15;
+    margin-bottom: 10px;
+  }
+
+  .body {
+    font-size: clamp(0.8125rem, 3.6vw, 0.875rem);
+    line-height: 1.55;
+  }
+
+  /* This 220px floor — not each section's .showcase min-height — is
+     what actually sizes every fan block today, which is why the
+     previous round's Hero 200px / Notifications 180px never took
+     effect. Drop it and let each showcase govern. */
+  .grow { min-height: 0; }
+
+  /* .split has exactly one call site — MobileSection (verified by
+     grep; see D10). M3: a 9/19.5 frame at a legible scale takes ~59%
+     of the viewport, so the demo and this section's 6-line paragraph
+     provably cannot share one screen. The demo carries the section on
+     a phone; mobile.body stays visible on tablet and desktop and no
+     dictionary key changes. D3. `200` = card padding 72.6 + eyebrow
+     22.4 + 2-line title 65.2 + gap 20 + 20 safety, against Step 2.1's
+     reclaimed top padding (M4). Single knob if the frame's bottom
+     clips: raise `200`. */
+  .split {
+    gap: 20px;
+    --phone-width: clamp(132px, calc((100svh - 200px) * 9 / 19.5), 248px);
+  }
+
+  .split .body { display: none; }
+
+  /* .mobileOnly has exactly one call site — AdminPanelSection. */
+  .mobileOnly {
+    --phone-width: clamp(132px, calc((100svh - 200px) * 9 / 19.5), 248px);
+  }
+
+  /* Hero already carries exactly these two declarations on its own
+     .content (Hero.module.css) — which is precisely why Hero's copy sits
+     flush under the top padding and its fan floats in what is left,
+     while BookingSite/Notifications, whose .stack has no flex, are
+     content-height: .grow { flex: 1 1 0 } has zero free space to
+     consume, so ALL slack goes to .fill { justify-content: center } and
+     lands above the eyebrow (112px on Notifications at 390px). This
+     selector (0-2-0) also matches Hero's .content.stack and sets the
+     identical values, so Hero is provably unchanged. Phone-only: at
+     tablet widths centring is the better look. M5/D4. */
+  .fill > .stack {
+    flex: 1 1 auto;
+    min-height: 0;
   }
 }
 

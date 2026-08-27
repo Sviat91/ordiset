@@ -32,6 +32,8 @@
     "phoneLabel": "Live demo preview — coming soon"
   },
   "admin": {
+    "eyebrow": "Admin panel",
+    "title": "Your whole business, in one panel",
     "demoTitle": "Ordiset admin panel demo",
     "demoTitleMobile": "Ordiset admin panel demo (mobile)",
     "phoneLabel": "Admin panel preview — coming soon"

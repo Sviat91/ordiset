@@ -107,3 +107,22 @@ h2 {
     scroll-behavior: auto;
   }
 }
+
+/* Mobile IA (D7): #preview is hidden (its demo duplicated #mobile's), and
+   #mobile moves ahead of #admin so the customer-facing app is shown
+   before the back office — the same narrative desktop has. Visual order
+   only; the DOM in app/[lang]/page.tsx is unchanged, so desktop and
+   lib/sections.ts's DOM-order accumulation are untouched. */
+@media (max-width: 899px) {
+  main {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #overview { order: 1; }
+  #mobile { order: 2; }
+  #admin { order: 3; }
+  #booking-site { order: 4; }
+  #notifications { order: 5; }
+  #contact { order: 6; }
+}

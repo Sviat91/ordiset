@@ -117,3 +117,39 @@
     margin-right: 22px;
   }
 }
+
+/* Below 900px the nav is only meant to sit over the Hero: absolute
+   positioning pins it 16px from the *document* top (body is static and
+   `overflow-x: clip` creates no containing block), so it scrolls away
+   with the first section instead of covering every card. Width-only
+   query on purpose — a short desktop window keeps its fixed nav. D4. */
+@media (max-width: 899px) {
+  .nav {
+    position: absolute;
+    top: var(--nav-top);
+    top: calc(var(--nav-top) + env(safe-area-inset-top, 0px));
+  }
+}
+
+/* The row cannot shrink (StableLabel is nowrap, "ORDISET" is one word),
+   so at narrow widths it overflows the pill and the CTA is clipped by
+   body{overflow-x:clip}. Reclaim ~26px of chrome, then drop the
+   wordmark where even that is not enough. See M1. */
+@media (max-width: 560px) {
+  .row {
+    gap: 12px;
+    padding-inline: 10px 8px;
+  }
+
+  .brand { gap: 8px; }
+
+  .cta { padding: 8px 12px; }
+}
+
+/* Re-derived against the live 390px screenshot (M1): the row needs
+   ~296px and 390px offers 342 — the wordmark never needed to go
+   there. It genuinely does not fit at 320px (272 available), so the
+   net stays, 41px lower. Knob if 360px still clips: 359 -> 374. */
+@media (max-width: 359px) {
+  .wordmark { display: none; }
+}

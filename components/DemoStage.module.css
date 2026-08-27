@@ -6,7 +6,13 @@
   /* Fallback for when an ancestor's height is indefinite (the site's
      max-width:899px / max-height:700px static-layout mode) — only binds
      there, since sticky mode always supplies a definite, taller box. */
-  min-height: min(72svh, 640px);
+  /* Opt-out channel. PhoneFrame supplies a definite height (explicit
+     width + aspect-ratio), so this indefinite-height fallback must not
+     apply inside a phone: at the shrunken mobile --phone-width it is
+     ~73px TALLER than the screen, which inflates the ResizeObserver box
+     and makes the fixedViewport branch over-scale the document by 25%
+     on the width axis. See M2/D1 in handoff/mobile_polish_plan.md. */
+  min-height: var(--stage-min-height, min(72svh, 640px));
 }
 
 .frame {

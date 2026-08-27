@@ -45,26 +45,69 @@
   z-index: 0;
 }
 
-.showcase:hover .shot1 {
-  transform: translate(-270%, -16%) rotate(-21deg);
+/* Three shots, not six (user's explicit instruction): the three branded
+   salon sites — Aura (shot1), Blush (shot2), Loom (shot3). The two
+   second screens (loom-booking, aura-booking) and the Telegram bot are
+   hidden on phones only; desktop still shows all six. Sizing runs off a
+   single --fan-h: the phone width is derived from it, so the fan can
+   never be taller than the block it lives in — which is what made it
+   run into the next section. Knob for bigger phones: raise 38svh.
+   M6/M7/D6/D7. */
+@media (max-width: 700px) {
+  .showcase {
+    --fan-h: clamp(190px, 38svh, 300px);
+    min-height: var(--fan-h);
+  }
+
+  .shot4,
+  .shot5,
+  .shot6 {
+    display: none;
+  }
+
+  .phoneShot {
+    top: 50%;
+    --phone-width: calc(var(--fan-h) / 2.5);
+    --island-width: calc(var(--phone-width) * 0.3);
+    --island-height: calc(var(--phone-width) * 0.08);
+    --island-top: calc(var(--phone-width) * 0.045);
+  }
+
+  /* top:50% + symmetric translateY centres the fan on the block at any
+     block height — .grow now stretches it (D4), so a fixed % anchor
+     would drift. Step d = 60% of a card: 60px of each side phone is
+     visible, against 29px with six. D5. */
+  .shot1 { transform: translate(-110%, -46%) rotate(-8deg); }
+  .shot2 { transform: translate(-50%, -54%) rotate(0deg); z-index: 4; }
+  .shot3 { transform: translate(10%, -46%) rotate(8deg); }
 }
 
-.showcase:hover .shot2 {
-  transform: translate(-174%, -22%) rotate(-13deg);
-}
+/* Also min-width, not just hover: these desktop-spread rules are 0-3-0
+   and outrank the 0-1-0 mobile block above, so a mouse in a <=700px
+   window would throw the three surviving cards out to the six-shot
+   offsets. D8. */
+@media (hover: hover) and (min-width: 701px) {
+  .showcase:hover .shot1 {
+    transform: translate(-270%, -16%) rotate(-21deg);
+  }
 
-.showcase:hover .shot3 {
-  transform: translate(-80%, -30%) rotate(-6deg);
-}
+  .showcase:hover .shot2 {
+    transform: translate(-174%, -22%) rotate(-13deg);
+  }
 
-.showcase:hover .shot4 {
-  transform: translate(14%, -30%) rotate(6deg);
-}
+  .showcase:hover .shot3 {
+    transform: translate(-80%, -30%) rotate(-6deg);
+  }
 
-.showcase:hover .shot5 {
-  transform: translate(106%, -22%) rotate(13deg);
-}
+  .showcase:hover .shot4 {
+    transform: translate(14%, -30%) rotate(6deg);
+  }
 
-.showcase:hover .shot6 {
-  transform: translate(200%, -16%) rotate(21deg);
+  .showcase:hover .shot5 {
+    transform: translate(106%, -22%) rotate(13deg);
+  }
+
+  .showcase:hover .shot6 {
+    transform: translate(200%, -16%) rotate(21deg);
+  }
 }

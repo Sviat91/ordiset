@@ -38,6 +38,21 @@
   margin-top: 20px;
 }
 
+/* Locale-invariant by construction: the UK pair is ~409px wide and
+   cannot fit any phone, and wrapping would make the Hero's height
+   depend on the language (the shift StableLabel exists to prevent).
+   Stack instead. D10/M3. */
+@media (max-width: 560px) {
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    width: min(100%, 320px);
+    margin-inline: auto;
+    margin-top: 14px;
+  }
+}
+
 .content.stack > *:last-child {
   margin-top: clamp(12px, 2vw, 24px);
 }
@@ -120,23 +135,75 @@
   z-index: 0;
 }
 
-.showcase:hover .shotFarLeft {
-  transform: translate(-172%, -34%) rotate(-19deg);
+/* Three shots, not five (D7/M5). Five 16:10 cards inside 390px show
+   34px of each side card; three at a 52% step show 89px — 2.6x. The
+   dropped pair (about, blush-specialists) is the weakest signal plus
+   a third near-duplicate specialist screen; the survivors read
+   brand -> choose -> book. z-index stays on the base rules. */
+@media (max-width: 700px) {
+  .showcase { min-height: 140px; }
+
+  .shotLeft,
+  .shotFarRight { display: none; }
+
+  .shot { width: clamp(140px, 44vw, 196px); }
+
+  .shotFarLeft { transform: translate(-102%, -26%) rotate(-7deg); }
+  .shotCenter  { transform: translate(-50%, -44%) rotate(0deg); }
+  .shotRight   { transform: translate(2%, -26%) rotate(7deg); }
 }
 
-.showcase:hover .shotLeft {
-  transform: translate(-114%, -46%) rotate(-11deg);
+@media (hover: hover) {
+  .showcase:hover .shotFarLeft {
+    transform: translate(-172%, -34%) rotate(-19deg);
+  }
+
+  .showcase:hover .shotLeft {
+    transform: translate(-114%, -46%) rotate(-11deg);
+  }
+
+  .showcase:hover .shotRight {
+    transform: translate(14%, -46%) rotate(11deg);
+  }
+
+  .showcase:hover .shotFarRight {
+    transform: translate(72%, -34%) rotate(19deg);
+  }
+
+  .showcase:hover .shotCenter {
+    transform: translate(-50%, -60%) scale(1.03);
+  }
 }
 
-.showcase:hover .shotRight {
-  transform: translate(14%, -46%) rotate(11deg);
+/* Hero is the tightest section on the page (M2: 541 of 547px). Type
+   shrinks; the lede's clamp is width-driven so a 360px Android lands
+   at 13px and 9 lines instead of 14px and 10. Nothing here is
+   locale-conditional — StableTextBlock reserves the tallest variant,
+   so the height is the same in EN, UK and PL by construction. */
+@media (max-width: 560px) {
+  .content h1 {
+    font-size: 1.625rem;
+    line-height: 1.1;
+  }
+
+  .content .lede {
+    font-size: clamp(0.8125rem, 3.6vw, 0.875rem);
+    line-height: 1.45;
+  }
+
+  .primary,
+  .secondary {
+    padding: 9px 18px;
+  }
 }
 
-.showcase:hover .shotFarRight {
-  transform: translate(72%, -34%) rotate(19deg);
-}
-
-.showcase:hover .shotCenter {
-  transform: translate(-50%, -60%) scale(1.03);
+/* Landscape phones and short narrow windows: no readable type scale
+   fits a 385-character lede, two stacked CTAs and a legible fan in
+   what is left. 620px and not 700px on purpose — media queries read
+   the *large* viewport (745 on a 390x844 phone) while svh reads the
+   small one (660), and 700 would risk deleting this paragraph on a
+   normal iPhone. D5. */
+@media (max-width: 899px) and (max-height: 620px) {
+  .lede { display: none; }
 }
 

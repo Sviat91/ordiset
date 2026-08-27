@@ -26,9 +26,44 @@
 @media (max-width: 899px), (max-height: 700px) {
   .card {
     position: static;
-    min-height: 0;
-    padding-block: clamp(72px, 10vh, 120px);
+    /* min-height makes each section a screen (D1); scroll-snap-align pairs
+       with scroll-snap-type in app/globals.css — delete that one line there
+       to fall back to plain scroll. */
+    min-height: 100svh;
+    /* Top is real nav clearance, not a guess: the nav is absolute at
+       --nav-top and --nav-pill-h tall (D4, prior plan), so it owns the
+       first 72px of the document. Bottom is svh-elastic so tall phones
+       get more air and short ones do not lose the content. The second
+       declaration is progressive enhancement: env() is 0 today (no
+       viewport-fit=cover — D6) and a browser that cannot parse it keeps
+       the first. Do NOT add viewport-fit=cover. */
+    padding-block: calc(var(--nav-h) + 8px) clamp(28px, 5svh, 56px);
+    padding-block:
+      calc(var(--nav-h) + 8px + env(safe-area-inset-top, 0px))
+      calc(clamp(28px, 5svh, 56px) + env(safe-area-inset-bottom, 0px));
+    scroll-snap-align: start;
     box-shadow: none;
     transform: none !important;
+  }
+}
+
+/* Used by PreviewSection (D6). Width-only on purpose so a short desktop
+   window keeps the section. */
+@media (max-width: 899px) {
+  .hiddenNarrow {
+    display: none;
+  }
+
+  /* Below 900px Nav.module.css makes the nav position:absolute, so it is
+     painted once at the top of the *document* and covers only the first
+     section — every later card was reserving 80px of clearance for a nav
+     that is not there ("сверху огромный отступ"). Width-only on purpose:
+     a short *wide* window keeps position:fixed and needs the clearance on
+     every card. :first-of-type is Hero — DOM-first in app/[lang]/page.tsx
+     AND order:1 in the mobile IA, so DOM and visual first agree. env()
+     pair per D6 of handoff/mobile_fit_plan.md. D3. */
+  .card:not(:first-of-type) {
+    padding-block-start: clamp(32px, 6svh, 56px);
+    padding-block-start: calc(clamp(32px, 6svh, 56px) + env(safe-area-inset-top, 0px));
   }
 }

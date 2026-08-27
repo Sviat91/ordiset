@@ -23,3 +23,24 @@
   font-size: 0.8125rem;
   color: var(--text-faint);
 }
+
+@media (max-width: 899px) {
+  .section { scroll-snap-align: start; }
+}
+
+/* M6: 573px of content in a 468px box today. padding-block overrides
+   only the block axis of the base `padding: … 0` shorthand, so the
+   0 inline padding is preserved. env() pair per D6. */
+@media (max-width: 560px) {
+  .section {
+    padding-block: clamp(56px, 9svh, 96px) clamp(40px, 7svh, 80px);
+    padding-block:
+      calc(clamp(56px, 9svh, 96px) + env(safe-area-inset-top, 0px))
+      calc(clamp(40px, 7svh, 80px) + env(safe-area-inset-bottom, 0px));
+  }
+
+  .footer {
+    margin-top: 32px;
+    padding-top: 20px;
+  }
+}

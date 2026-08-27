@@ -15,6 +15,10 @@
   height: 100%;
   border-radius: 30px;
   overflow: hidden;
+  /* DemoStage's indefinite-height fallback must not apply here — this
+     box is always definite (.phone has an explicit width + aspect-ratio)
+     and is smaller than that fallback on a phone. D1. */
+  --stage-min-height: 0px;
   background-image: var(--shell-gradient), var(--shell-dot-grid);
   background-size:
     100% 100%,
