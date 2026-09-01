@@ -57,10 +57,51 @@ export default function DemoStage({
     return () => ro.disconnect();
   }, []);
 
+  // Hide native scrollbar chrome inside the embedded document without
+  // disabling scroll: the SPA's content is intentionally taller/wider than
+  // the viewport it's rendered at (both the `fixedViewport` and auto-fit
+  // branches below), so it scrolls internally by design. Idempotent via the
+  // id check, so it's safe to call from multiple triggers below.
+  const hideScrollbars = () => {
+    try {
+      const doc = iframeRef.current?.contentDocument;
+      if (doc?.head && !doc.getElementById("demo-stage-hide-scrollbar")) {
+        const style = doc.createElement("style");
+        style.id = "demo-stage-hide-scrollbar";
+        style.textContent = `
+          * { scrollbar-width: none !important; -ms-overflow-style: none !important; }
+          *::-webkit-scrollbar {
+            width: 0 !important;
+            height: 0 !important;
+            display: none !important;
+          }
+        `;
+        doc.head.appendChild(style);
+      }
+    } catch {
+      // cross-origin or not yet accessible; nothing to inject
+    }
+  };
+
   const handleLoad = () => {
     clickedRef.current = false;
     setLoadNonce((n) => n + 1);
+    hideScrollbars();
   };
+
+  // `src` is present in the server-rendered HTML, so on a warm cache the
+  // browser can finish loading the iframe before React finishes hydrating
+  // and attaches `onLoad` above — that `load` event fires into a void and
+  // is lost for good, silently skipping `hideScrollbars()` for the whole
+  // page load (verified live: V-2026-09-01, every DemoStage instance
+  // missing the injected style after a warm reload). Retrying once on
+  // mount closes the race: if the load already happened, the document is
+  // already fully there to inject into; if it hasn't, `onLoad` (now
+  // attached) still catches it normally. Same shape as the `autoClickText`
+  // effect below, which has the identical race for the same reason.
+  useEffect(() => {
+    hideScrollbars();
+  }, []);
 
   // Auto-click: the embedded demo's admin-nav button has no stable id/data
   // attribute (text match is the only hook), and its target view isn't
