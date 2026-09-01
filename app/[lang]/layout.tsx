@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Inter } from "next/font/google";
 import Nav from "@/components/Nav";
 import LocaleProvider from "@/components/LocaleProvider";
@@ -54,6 +55,8 @@ export default async function RootLayout({
   params,
 }: LayoutProps<"/[lang]">) {
   const { lang } = await params;
+  const umamiSrc = process.env.NEXT_PUBLIC_UMAMI_SRC;
+  const umamiWebsiteId = process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID;
   return (
     <html lang={lang} className={inter.variable}>
       <body>
@@ -61,6 +64,13 @@ export default async function RootLayout({
           <Nav />
           {children}
         </LocaleProvider>
+        {umamiSrc && umamiWebsiteId && (
+          <Script
+            src={umamiSrc}
+            data-website-id={umamiWebsiteId}
+            data-domains="ordiset.com,www.ordiset.com"
+          />
+        )}
       </body>
     </html>
   );
